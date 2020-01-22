@@ -1,8 +1,8 @@
-# How HTTP requests work
+# How a request get served
 
 What happens when you type an URL in the browser, from start to finish
 
-### The HTTP protocol
+### The protocol
 
 - I analyze URL requests only
 - Things relate to macOS / Linux
@@ -38,7 +38,7 @@ I assume you type an actual URL.
 
 When you enter the URL and press enter, the browser first builds the full URL.
 
-If you just entered a domain, like [clientserver.com][plDb], the browser by default will prepend HTTP:// to it, defaulting to the HTTP protocol.
+If you just entered a domain, like clientserver.com, the browser by default will prepend HTTP:// to it, defaulting to the HTTP protocol.
 
 Things relate to macOS / Linux
 Just FYI. Windows might do some things slightly differently.
@@ -55,7 +55,7 @@ Chrome has a handy DNS cache visualizer you can see at chrome://net-internals/#d
 If nothing is found there, the browser uses the DNS resolver, using the gethostbyname POSIX system call to retrieve the host information.
 
 ### gethostbyname
-gethostbyname first looks in the local hosts file, which on macOS or Linux is located in /etc/hosts, to see if the system provides the information locally.
+Gethostbyname first looks in the local hosts file, which on macOS or Linux is located in /etc/hosts, to see if the system provides the information locally.
 
 If this does not give any information about the domain, the system makes a request to the DNS server.
 
@@ -79,11 +79,11 @@ The DNS server does not know the address of each and every domain name on the pl
 
 What it knows is where the top-level DNS resolvers are.
 
-A top-level domain is the domain extension: .com, .it, .pizza and so on.
+A top-level domain is the domain extension: Clientserver.com, .it, .pizza and so on.
 
 Once the root DNS server receives the request, it forwards the request to that top-level domain (TLD) DNS server.
 
-Say you are looking for [clientserver.com][plDb]. The root domain DNS server returns the IP of the .com TLD server.
+Say you are looking for clientserver.com. The root domain DNS server returns the IP of the .com TLD server.
 
 Now our DNS resolver will cache the IP of that TLD server, so it does not have to ask the root DNS server again for it.
 
@@ -93,7 +93,7 @@ How? When you buy a domain, the domain registrar sends the appropriate TDL the n
 
 Those are the DNS servers of the hosting provider. They are usually more than 1, to serve as backup.
 
-### For example:
+***For example:***
 ```sh
 $ ns1.dreamhost.com
 $ ns2.dreamhost.com
@@ -117,7 +117,7 @@ Once the connection is established, we can send the request
 ### Sending the request
 The request is a plain text document structured in a precise way determined by the communication protocol.
 
-It’s composed of 3 parts:
+***It’s composed of 3 parts:***
 
 > -the request line
 >the request header
@@ -126,10 +126,10 @@ It’s composed of 3 parts:
 ### The request line
 The request line sets, on a single line:
 
-the HTTP method
-the resource location
-the protocol version
-Example:
+- The HTTP method
+- The resource location
+- The protocol version
+***Example:***
 - GET / HTTP/1.1
 
 ### The request header
@@ -140,8 +140,7 @@ There are 2 mandatory fields, one of which is Host, and the other is Connection,
 - Host: Clientserver.com
 - Connection: close
 Host indicates the domain name which we want to target, while Connection is always set to close unless the connection must be kept open.
-
-Some of the most used header fields are:
+- ***some of the most used header fields are:***
 
 * Origin
 * Accept
@@ -166,21 +165,21 @@ The response starts with the status code and the status message. If the request 
 200 OK
 The request might return a different status code and message, like one of these:
 ```sh
-404 Not Found
-403 Forbidden
-301 Moved Permanently
-500 Internal Server Error
-304 Not Modified
-401 Unauthorized
+$ 404 Not Found
+$ 403 Forbidden
+$ 301 Moved Permanently
+$ 500 Internal Server Error
+$ 304 Not Modified
+$ 401 Unauthorized
 ```
 The response then contains a list of HTTP headers and the response body (which, since we’re making the request in the browser, is going to be HTML)
 
 ### Parse the HTML
 The browser now has received the HTML and starts to parse it, and will repeat the exact same process we did for all the resources required by the page:
 
-CSS files
-images
-the favicon
-JavaScript files
+- CSS files
+- Images
+- The favicon
+- JavaScript files
 …
 How browsers render the page then is out of the scope, but it’s important to understand that the process I described is not just for the HTML pages, but for any item that’s served over HTTP.
