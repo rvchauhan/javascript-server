@@ -1,15 +1,15 @@
 const users = [
     {
-        traineeemail: "trainee1@successive.tech",
-        revieweremail: "reviewer1@successive.tech"
+        traineeEmail: "trainee1@successive.tech",
+        reviewerEmail: "reviewer1@successive.tech"
     },
     {
-        traineeemail: "trainee1@successive.tech",
-        revieweremail: "reviewer1@successive.tech"
+        traineeEmail: "trainee2@successiveriv.tech",
+        reviewerEmail: "reviewer2@successive.tech"
     },
     {
-        traineeemail: "trainee1@successive.tech",
-        revieweremail: "reviewer1@successive.tech"
+        traineeEmail: "trainee3@successive.tech",
+        reviewerEmail: "reviewer3@successive.tech"
     }
 ]
 function validateEmail(b) {
@@ -17,34 +17,41 @@ function validateEmail(b) {
     let a = regex.test(b);
     if (a == true) {
         return true;
-    }
-    else {
+    } else {
         return false;
     }
 }
 
+const validUser = [];
+const invalidUser = [];
 
 validateuser(users);
 function validateuser(users) {
     let valid = 0;
     let invalid = 0;
-    
-   
+
+
     users.forEach(element => {
-        const {traineeEmail:tra, reviewerEmail: rie}=element
+        const { traineeEmail: tra, reviewerEmail: rie } = element
         let m = validateEmail(tra);
         let n = validateEmail(rie);
-        
+
         if (m == true && n == true) {
+            validUser.push({ tra, rie });
             valid++;
-            console.log("valid user Email:");
         } else {
+            invalidUser.push({ tra, rie });
             invalid++;
-            console.log("invalid user Email:");
+
         }
     });
-        console.log("invaliduser:"+invalid);
-        console.log("validuser:"+valid);
+    console.log("validuser:" + valid);
+    validUser.forEach(element => {
+        console.log("valid user Email:", element);
+    });
+    console.log("invaliduser:" + invalid);
+    invalidUser.forEach(element => {
+        console.log("invalid user Email:", element);
+    });
 
-
-}
+} 
