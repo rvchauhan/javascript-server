@@ -1,0 +1,27 @@
+{
+  "name": "javascript-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "Equilateral": "node extra/patterns/Equilateral.js",
+    "Diamond": "node extra/patterns/Diamond.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rvchauhan/javascript-server.git"
+  },
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rvchauhan/javascript-server/issues"
+  },
+  "homepage": "https://github.com/rvchauhan/javascript-server#readme",
+  "devDependencies": {
+    "@babel/core": "7.8.3",
+    "@babel/node": "7.8.3",
+    "@babel/preset-env": "7.8.3"
+  }
+}
