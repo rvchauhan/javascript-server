@@ -1,0 +1,47 @@
+{
+    "name": "javascript-server",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "execute": "node extra/patterns/diamond.js",
+    "execute1": "node extra/patterns/equilateral.js",
+    "execute2": "node extra/utils/validation.js",
+    "execute3": "node extra/utils/permission.js",
+    "execute4": "npx babel-node extra",
+    "start:extra": "babel-node extra",
+    "start:extraTs": "tsc-watch --project . --onSuccess \"npm run nodemon\"",
+    "nodemon": "nodemon ./dist/index.js",
+    "lint": "./node_modules/tslint/bin/tslint -c tslint.json -p tsconfig.json --exclude 'node_modules/**/*.{j,t}s'",
+    "lint:fix": "npm run lint --fix"
+    },
+    "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ujjwal-jain18/javascript-server.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+    "url": "https://github.com/ujjwal-jain18/javascript-server/issues"
+    },
+    "homepage": "https://github.com/ujjwal-jain18/javascript-server#readme",
+    "dependencies": {
+    "@babel/core": "^7.8.3",
+    "@babel/node": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "@types/node": "^13.5.0",
+    "babel": "^6.23.0",
+    "babel-node": "0.0.1-security",
+    "commitizen": "^4.0.3",
+    "husky": "^4.2.1",
+    "nodemon": "^2.0.2",
+    "pre-commit": "^1.2.2",
+    "pre-push": "^0.1.1",
+    "tslint": "^6.0.0"
+    },
+    "devDependencies": {
+    "tsc-watch": "^4.1.0",
+    "typescript": "^3.7.5"
+    }
+    }
