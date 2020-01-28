@@ -1,4 +1,3 @@
-
 const permissions = {
     'getUsers': {
         all: ['head-trainer'],
@@ -7,7 +6,6 @@ const permissions = {
         delete: []
     }
 };
-
 let users = [
     {
         traineeEmail: "trainee1@successive.tech",
@@ -22,9 +20,4 @@ let users = [
         reviewerEmail: "reviewer3@successive.tech"
     }
 ]
-
-
-
-
-
-export {users,permissions}
+export { users , permissions }

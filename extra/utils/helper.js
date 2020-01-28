@@ -1,10 +1,6 @@
-function validateEmail(b) {
+function validateEmail(b) 
+{
     const regex = /([a-zA-z0-9\+_.@])+@successive.tech/gm;
-    let a = regex.test(b);
-    if (a == true) {
-        return true;
-    } else {
-        return false;
-    }
+    return regex.test(b);
 }
-export default validateEmail;
+    export default validateEmail;
