@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+<<<<<<< HEAD
   "dependencies": {
     "@babel/core": "^7.8.3",
     "@babel/node": "^7.8.3",
@@ -37,15 +38,34 @@
     "pre-commit": "npm run lint && npm test",
    "pre-push": "npm run lint && npm test"
     
+=======
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "Equilateral": "node extra/patterns/Equilateral.js",
+    "Diamond": "node extra/patterns/Diamond.js"
+>>>>>>> 9c27c621cc46d85ab3093d622e94ab7ca137c74e
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rvchauhan/javascript-server.git"
   },
+<<<<<<< HEAD
+=======
+  "type": "module",
+>>>>>>> 9c27c621cc46d85ab3093d622e94ab7ca137c74e
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/rvchauhan/javascript-server/issues"
   },
+<<<<<<< HEAD
   "homepage": "https://github.com/rvchauhan/javascript-server#readme"
+=======
+  "homepage": "https://github.com/rvchauhan/javascript-server#readme",
+  "devDependencies": {
+    "@babel/core": "7.8.3",
+    "@babel/node": "7.8.3",
+    "@babel/preset-env": "7.8.3"
+  }
+>>>>>>> 9c27c621cc46d85ab3093d622e94ab7ca137c74e
 }
