@@ -36,7 +36,7 @@ class Server {
             if (err) {
                 throw err;
             }
-            console.log(`App is running successfuly on port ${port}`);
+            console.log(` App is running successfuly on port $ { port } `);
 
         })
     }
@@ -55,18 +55,18 @@ class Server {
         const { app } = this;
         app.use('/health-check', (req, res) => 
         {
-            console.log('Inside health check');
-            res.send('I am OK');
+            console.log(' Inside health check ');
+            res.send(' I am OK ');
         });
 
         app.use('/api', (req: NewRequest, res, next) => 
         {
-            console.log("inside Middleware");
+            console.log(" inside Middleware ");
             req.user = {
-                id: '1',
-                name: 'Node'
+                id: ' 1 ',
+                name: ' Node '
             }
-            res.send('OK')
+            res.send(' OK ')
         })
 
         app.use(notFoundRoutes);
