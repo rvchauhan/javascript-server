@@ -1,8 +1,10 @@
 import { server } from "typescript";
 import * as express from 'express';
+import IConfig from './config/IConfig'
+import Iconfig from "./config/IConfig";
 class Server {
     private app: express.Application;
-    constructor(private config)
+    constructor(private config : Iconfig)
      {
         this.app = express();
      }
