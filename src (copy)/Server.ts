@@ -4,6 +4,7 @@ import * as bodyParser from 'body-parser';
 import { Request } from 'express';
 import notFoundRoutes from './libs/routes/notFoundRoute'
 import errorHandler from './libs/routes/errorHandler'
+import Iconfig from './config/IConfig'
 
 interface User 
 {
@@ -18,7 +19,7 @@ interface NewRequest extends Request
 
 class Server {
     private app: express.Application;
-    constructor(private config)
+    constructor(private config : Iconfig)
      {
         this.app = express();
      }
