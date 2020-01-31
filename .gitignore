@@ -1,7 +1,3 @@
 node_modules
-<<<<<<< HEAD
 package-lock.json
 dist
-=======
-package-lock.json
->>>>>>> 9c27c621cc46d85ab3093d622e94ab7ca137c74e

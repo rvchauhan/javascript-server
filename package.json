@@ -1,71 +1,51 @@
 {
-  "name": "javascript-server",
+  "name": "express-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-<<<<<<< HEAD
-  "dependencies": {
-    "@babel/core": "^7.8.3",
-    "@babel/node": "^7.8.3",
-    "@babel/preset-env": "^7.8.3",
-    "@types/node": "^13.5.0",
-    "babel": "^6.23.0",
-    "babel-node": "0.0.1-security",
-    "commitizen": "^4.0.3",
-    "husky": "^4.2.1",
-    "nodemon": "^2.0.2",
-    "pre-commit": "^1.2.2",
-    "pre-push": "^0.1.1",
-    "tslint": "^6.0.0"
-  },
-  "devDependencies": {
-    "tsc-watch": "^4.1.0",
-    "typescript": "^3.7.5"
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm run lint"
+    }
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "execute" : "node extra/patterns/diamond.js",
-    
-    "execute1": "node extra/patterns/equilateral.js",
-    "execute2": "node extra/utils/validation.js",
-    "execute3": "node extra/utils/permission.js",
-    "execute4": "npx babel-node extra",
-    "start:extra": "babel-node extra",
+    "diamond": "node extra/patterns/diamond.js",
+    "equilateral": "node extra/patterns/equilateral.js",
+    "validation": "node extra/utils/validation.js",
+    "permission": "node extra/utils/permissions.js",
+    "build": "npx babel-node extra",
     "start:extraTs": "tsc-watch --project . --onSuccess \"npm run nodemon\"",
     "nodemon": "nodemon ./dist/index.js",
     "lint": "./node_modules/tslint/bin/tslint -c tslint.json -p tsconfig.json --exclude 'node_modules/**/*.{j,t}s'",
     "lint:fix": "npm run lint --fix",
-    "pre-commit": "npm run lint && npm test",
-   "pre-push": "npm run lint && npm test"
-    
-=======
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "Equilateral": "node extra/patterns/Equilateral.js",
-    "Diamond": "node extra/patterns/Diamond.js"
->>>>>>> 9c27c621cc46d85ab3093d622e94ab7ca137c74e
+    "start:express": "node src/index.ts"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rvchauhan/javascript-server.git"
+    "type": "git"
   },
-<<<<<<< HEAD
-=======
-  "type": "module",
->>>>>>> 9c27c621cc46d85ab3093d622e94ab7ca137c74e
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/rvchauhan/javascript-server/issues"
   },
-<<<<<<< HEAD
-  "homepage": "https://github.com/rvchauhan/javascript-server#readme"
-=======
-  "homepage": "https://github.com/rvchauhan/javascript-server#readme",
+  "homepage": "https://github.com/vibhor-garg-98/express-server#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "commitizen": "^4.0.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "husky": "^4.2.1",
+    "lodash": "^4.17.15",
+    "nodemon": "^2.0.2",
+    "tsc-watch": "^4.1.0"
+  },
   "devDependencies": {
-    "@babel/core": "7.8.3",
-    "@babel/node": "7.8.3",
-    "@babel/preset-env": "7.8.3"
+    "@babel/core": "^7.8.3",
+    "@babel/node": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "tslint": "^6.0.0",
+    "typescript": "^3.7.5",
+    "@types/express": "^4.17.2"
   }
->>>>>>> 9c27c621cc46d85ab3093d622e94ab7ca137c74e
 }

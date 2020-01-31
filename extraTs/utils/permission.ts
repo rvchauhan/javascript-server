@@ -1,6 +1,6 @@
 import {IgetUsers} from "../interfaces"
 import { users} from '../constant'
-function hasPermissions ( module: any, role :string, permissionType : string )
+function hasPermissions ( module: IgetUsers, role :string, permissionType : string )
  {
     let k : any = module[permissionType];
 
