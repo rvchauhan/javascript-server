@@ -19,13 +19,14 @@
     "lint": "./node_modules/tslint/bin/tslint -c tslint.json -p tsconfig.json --exclude 'node_modules/**/*.{j,t}s'",
     "lint:fix": "npm run lint --fix"
   },
-  "author": "Rahul",
+  "author": "Ral",
   "license": "ISC",
   "dependencies": {
-    "@types/express": "^4.17.2",
-    "express": "^4.17.1"
+
   },
   "devDependencies": {
+    "@types/express": "^4.17.2",
+    "express": "^4.17.1",
     "@babel/core": "^7.8.3",
     "@babel/node": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
