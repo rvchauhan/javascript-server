@@ -1,44 +1,83 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/usr/bin/nodejs', '/usr/bin/npm', 'run', 'src' ]
+1 verbose cli [ '/usr/bin/nodejs', '/usr/bin/npm', 'install', '@types/matter' ]
 2 info using npm@3.5.2
 3 info using node@v4.2.6
-4 verbose run-script [ 'presrc', 'src', 'postsrc' ]
-5 info lifecycle extra@1.0.0~presrc: extra@1.0.0
-6 silly lifecycle extra@1.0.0~presrc: no script for presrc, continuing
-7 info lifecycle extra@1.0.0~src: extra@1.0.0
-8 verbose lifecycle extra@1.0.0~src: unsafe-perm in lifecycle true
-9 verbose lifecycle extra@1.0.0~src: PATH: /usr/share/npm/bin/node-gyp-bin:/home/ravi.chauhan/Documents/express/express-server/javascript-server/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
-10 verbose lifecycle extra@1.0.0~src: CWD: /home/ravi.chauhan/Documents/express/express-server/javascript-server
-11 silly lifecycle extra@1.0.0~src: Args: [ '-c', 'tsc-watch --project . --onSuccess "npm run nodemon"' ]
-12 info lifecycle extra@1.0.0~src: Failed to exec src script
-13 verbose stack Error: extra@1.0.0 src: `tsc-watch --project . --onSuccess "npm run nodemon"`
-13 verbose stack spawn ENOENT
-13 verbose stack     at ChildProcess.<anonymous> (/usr/share/npm/lib/utils/spawn.js:17:16)
-13 verbose stack     at emitTwo (events.js:87:13)
-13 verbose stack     at ChildProcess.emit (events.js:172:7)
-13 verbose stack     at maybeClose (internal/child_process.js:821:16)
-13 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
-14 verbose pkgid extra@1.0.0
-15 verbose cwd /home/ravi.chauhan/Documents/express/express-server/javascript-server
-16 error Linux 4.15.0-74-generic
-17 error argv "/usr/bin/nodejs" "/usr/bin/npm" "run" "src"
-18 error node v4.2.6
-19 error npm  v3.5.2
-20 error file sh
-21 error code ELIFECYCLE
-22 error errno ENOENT
-23 error syscall spawn
-24 error extra@1.0.0 src: `tsc-watch --project . --onSuccess "npm run nodemon"`
-24 error spawn ENOENT
-25 error Failed at the extra@1.0.0 src script 'tsc-watch --project . --onSuccess "npm run nodemon"'.
-25 error Make sure you have the latest version of node.js and npm installed.
-25 error If you do, this is most likely a problem with the extra package,
-25 error not with npm itself.
-25 error Tell the author that this fails on your system:
-25 error     tsc-watch --project . --onSuccess "npm run nodemon"
-25 error You can get information on how to open an issue for this project with:
-25 error     npm bugs extra
-25 error Or if that isn't available, you can get their info via:
-25 error     npm owner ls extra
-25 error There is likely additional logging output above.
-26 verbose exit [ 1, true ]
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly fetchPackageMetaData @types/matter
+8 silly fetchNamedPackageData @types/matter
+9 silly mapToRegistry name @types/matter
+10 silly mapToRegistry scope (from package name) @types
+11 verbose mapToRegistry no registry URL found in name for scope @types
+12 silly mapToRegistry using default registry
+13 silly mapToRegistry registry https://registry.npmjs.org/
+14 silly mapToRegistry uri https://registry.npmjs.org/@types%2fmatter
+15 verbose request uri https://registry.npmjs.org/@types%2fmatter
+16 verbose request no auth needed
+17 info attempt registry request try #1 at 15:46:22
+18 verbose request id 84fb9348c4ca5eaf
+19 http request GET https://registry.npmjs.org/@types%2fmatter
+20 http 404 https://registry.npmjs.org/@types%2fmatter
+21 verbose headers { date: 'Fri, 31 Jan 2020 10:16:22 GMT',
+21 verbose headers   'content-type': 'application/json',
+21 verbose headers   'content-length': '21',
+21 verbose headers   connection: 'keep-alive',
+21 verbose headers   'set-cookie': [ '__cfduid=d81e8b66b5b385359f881642f109b543f1580465782; expires=Sun, 01-Mar-20 10:16:22 GMT; path=/; domain=.npmjs.org; HttpOnly; SameSite=Lax' ],
+21 verbose headers   'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+21 verbose headers   vary: 'Accept-Encoding',
+21 verbose headers   server: 'cloudflare',
+21 verbose headers   'cf-ray': '55daee044ed3d57f-DEL' }
+22 silly get cb [ 404,
+22 silly get   { date: 'Fri, 31 Jan 2020 10:16:22 GMT',
+22 silly get     'content-type': 'application/json',
+22 silly get     'content-length': '21',
+22 silly get     connection: 'keep-alive',
+22 silly get     'set-cookie': [ '__cfduid=d81e8b66b5b385359f881642f109b543f1580465782; expires=Sun, 01-Mar-20 10:16:22 GMT; path=/; domain=.npmjs.org; HttpOnly; SameSite=Lax' ],
+22 silly get     'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+22 silly get     vary: 'Accept-Encoding',
+22 silly get     server: 'cloudflare',
+22 silly get     'cf-ray': '55daee044ed3d57f-DEL' } ]
+23 silly fetchPackageMetaData Error: Not found : @types/matter
+23 silly fetchPackageMetaData     at makeError (/usr/share/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+23 silly fetchPackageMetaData     at CachingRegistryClient.<anonymous> (/usr/share/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+23 silly fetchPackageMetaData     at Request._callback (/usr/share/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+23 silly fetchPackageMetaData     at Request.self.callback (/usr/share/npm/node_modules/request/request.js:198:22)
+23 silly fetchPackageMetaData     at emitTwo (events.js:87:13)
+23 silly fetchPackageMetaData     at Request.emit (events.js:172:7)
+23 silly fetchPackageMetaData     at Request.<anonymous> (/usr/share/npm/node_modules/request/request.js:1082:10)
+23 silly fetchPackageMetaData     at emitOne (events.js:82:20)
+23 silly fetchPackageMetaData     at Request.emit (events.js:169:7)
+23 silly fetchPackageMetaData     at IncomingMessage.<anonymous> (/usr/share/npm/node_modules/request/request.js:1009:12)
+23 silly fetchPackageMetaData  error for @types/matter { [Error: Not found : @types/matter] pkgid: '@types/matter', statusCode: 404, code: 'E404' }
+24 silly rollbackFailedOptional Starting
+25 silly rollbackFailedOptional Finishing
+26 silly runTopLevelLifecycles Starting
+27 silly runTopLevelLifecycles Finishing
+28 silly install printInstalled
+29 verbose stack Error: Not found : @types/matter
+29 verbose stack     at makeError (/usr/share/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+29 verbose stack     at CachingRegistryClient.<anonymous> (/usr/share/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+29 verbose stack     at Request._callback (/usr/share/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+29 verbose stack     at Request.self.callback (/usr/share/npm/node_modules/request/request.js:198:22)
+29 verbose stack     at emitTwo (events.js:87:13)
+29 verbose stack     at Request.emit (events.js:172:7)
+29 verbose stack     at Request.<anonymous> (/usr/share/npm/node_modules/request/request.js:1082:10)
+29 verbose stack     at emitOne (events.js:82:20)
+29 verbose stack     at Request.emit (events.js:169:7)
+29 verbose stack     at IncomingMessage.<anonymous> (/usr/share/npm/node_modules/request/request.js:1009:12)
+30 verbose statusCode 404
+31 verbose pkgid @types/matter
+32 verbose cwd /home/ravi.chauhan/Documents/express/express-server/javascript-server
+33 error Linux 4.15.0-74-generic
+34 error argv "/usr/bin/nodejs" "/usr/bin/npm" "install" "@types/matter"
+35 error node v4.2.6
+36 error npm  v3.5.2
+37 error code E404
+38 error 404 Not found : @types/matter
+39 error 404
+40 error 404 '@types/matter' is not in the npm registry.
+41 error 404 You should bug the author to publish it (or use the name yourself!)
+42 error 404 Note that you can also install from a
+43 error 404 tarball, folder, http url, or git url.
+44 verbose exit [ 1, true ]
