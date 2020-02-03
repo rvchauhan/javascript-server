@@ -1,37 +1,25 @@
 import { server } from "typescript";
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
-import { Request } from 'express';
 import notFoundRoutes from './libs/routes/notFoundRoute'
 import errorHandler from './libs/routes/errorHandler'
 import Iconfig from './config/IConfig'
+import { NewRequest } from '../extraTs/interfaces'
 
-interface User 
-{
-    id: string;
-    name: string;
-}
 
-interface NewRequest extends Request 
-{
-    user: User;
-}
 
 class Server {
     private app: express.Application;
-    constructor(private config : Iconfig)
-     {
+    constructor(private config: Iconfig) {
         this.app = express();
-     }
-    bootstrap = () =>
-     {
+    }
+    bootstrap = () => {
         this.initBodyParser();
         this.setupRoutes();
         return this;
-     }
+    }
 
-    run = () =>
-     {
+    run = () => {
         const { app, config: { port } } = this;
         app.listen(port, (err) => {
             if (err) {
@@ -41,27 +29,23 @@ class Server {
 
         })
     }
-    initBodyParser = () =>
-     {
+    initBodyParser = () => {
         const { app } = this;
         app.use(bodyParser.urlencoded({ extended: false }))
 
         // parse application/json
         app.use(bodyParser.json())
 
-     }
-    setupRoutes = () => 
-    {
+    }
+    setupRoutes = () => {
 
         const { app } = this;
-        app.use('/health-check', (req, res) => 
-        {
+        app.use('/health-check', (req, res) => {
             console.log('Inside health check');
             res.send('I am OK');
         });
 
-        app.use('/api', (req: NewRequest, res, next) => 
-        {
+        app.use('/api', (req: NewRequest, res, next) => {
             console.log("inside Middleware");
             req.user = {
                 id: '1',

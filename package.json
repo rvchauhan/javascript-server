@@ -14,7 +14,7 @@
     "src": "tsc-watch --project . --onSuccess \"npm run nodemon\"",
     "start:extra": "babel-node extra",
     "start:extraTs": "tsc-watch --project . --onSuccess \"npm run nodemon\"",
-    "nodemon": "nodemon ./dist/index.js",
+    "nodemon": "nodemon ./dist/src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "./node_modules/tslint/bin/tslint -c tslint.json -p tsconfig.json --exclude 'node_modules/**/*.{j,t}s'",
     "lint:fix": "npm run lint --fix"
@@ -22,7 +22,6 @@
   "author": "Ravi",
   "license": "ISC",
   "dependencies": {
-    "postman": "^0.2.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.2",
