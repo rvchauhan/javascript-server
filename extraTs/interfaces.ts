@@ -27,4 +27,4 @@ interface User {
 interface NewRequest extends Request {
     user: User;
 }
-export { Ipermissions, IgetUsers, Iusers, IvalidUser,User,NewRequest };
+export { Ipermissions, IgetUsers, Iusers, IvalidUser, User, NewRequest };
