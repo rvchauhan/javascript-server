@@ -20,7 +20,7 @@ class TraineeController {
                 position: ' Trainee Developer ',
                 City: 'Noida'
             }
-    })
+        })
     }
 
     list = (req: Request, res: Response) => {
@@ -48,7 +48,7 @@ class TraineeController {
             }]
         })
     }
-     put = (req: Request, res: Response) => {
+    put = (req: Request, res: Response) => {
         console.log("----------UPDATE-TRAINEE---------------");
         res.send({
             status: 'OK',

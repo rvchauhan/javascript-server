@@ -1,4 +1,3 @@
-
 import { Ipermissions, Iusers } from './interfaces';
 
 const permissions: Ipermissions = {
