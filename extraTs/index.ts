@@ -1,5 +1,5 @@
-import { diamond, equilateral } from './pattern/';
-import { hasPermissions, validateuser } from './utils';
+import { diamond, equilateral } from './pattern';
+import { hasPermissions, validateuser } from './utils/index';
 import { users, getUsers } from './constant';
 diamond(5);
 equilateral(5);
