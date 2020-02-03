@@ -29,8 +29,11 @@
   "license": "ISC",
   "bugs": {
   },
-  "homepage": "https://github.com/vibhor-garg-98/express-server#readme",
+  "homepage": "https://github.com//express-server#readme",
   "dependencies": {
+    
+  },
+  "devDependencies": {
     "body-parser": "^1.19.0",
     "commitizen": "^4.0.3",
     "dotenv": "^8.2.0",
@@ -38,9 +41,7 @@
     "husky": "^4.2.1",
     "lodash": "^4.17.15",
     "nodemon": "^2.0.2",
-    "tsc-watch": "^4.1.0"
-  },
-  "devDependencies": {
+    "tsc-watch": "^4.1.0",
     "@babel/core": "^7.8.3",
     "@babel/node": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
