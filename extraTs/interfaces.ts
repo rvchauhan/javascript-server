@@ -19,15 +19,12 @@ interface Iusers {
 interface IvalidUser {
     [index: number]: string;
 }
-interface User 
-{
+interface User {
     id: string;
     name: string;
 }
 
-interface NewRequest extends Request 
-{
+interface NewRequest extends Request {
     user: User;
 }
-
 export { Ipermissions, IgetUsers, Iusers, IvalidUser,User,NewRequest };

@@ -1,7 +1,6 @@
 import { diamond, equilateral } from './pattern';
-import { hasPermissions, validateuser } from './utils';
+import { hasPermissions, validateuser } from './utils/index';
 import { users, getUsers } from './constant';
-import { IgetUsers } from './interfaces'
 diamond(5);
 equilateral(5);
 console.log(hasPermissions(getUsers, 'trainee', 'read'));
