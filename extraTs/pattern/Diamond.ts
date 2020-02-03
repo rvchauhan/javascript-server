@@ -21,5 +21,4 @@ function diamond(n: number): void {
         console.log(" wrong input ");
     }
 }
-
 export default diamond; 
