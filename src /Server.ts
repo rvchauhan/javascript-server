@@ -1,4 +1,4 @@
- import { server } from "typescript";
+import { server } from "typescript";
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import notFoundRoutes from './libs/routes/notFoundRoute'
@@ -32,7 +32,7 @@ class Server {
 
         // parse application/json
         app.use(bodyParser.json())
-     }
+    }
     setupRoutes = () => {
         const { app } = this;
         app.use('/health-check', (req, res) => {
