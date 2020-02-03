@@ -1,5 +1,3 @@
-// let r = Number(process.argv[2]);
-// diamond(r);
 function diamond(n) {
     if (n < 11 && n > 1) {
         for (let i = 0; i < n; i++) {

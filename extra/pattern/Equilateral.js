@@ -1,5 +1,3 @@
-// let n = Number(process.argv[2]);
-// equilateral(n);
 function equilateral(b) {
     if (b > 2 && b < 11) {
         for (let i = 1; i <= b; i++) {
@@ -15,8 +13,7 @@ function equilateral(b) {
             }
             console.log(s);
         }
-    }
-    else {
+    } else {
         console.log(" wrong choice ");
     }
 }
