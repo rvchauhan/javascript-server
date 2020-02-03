@@ -1,7 +1,4 @@
-// let n = Number(process.argv[2]);
-// equilateral(n);
-function equilateral ( b )
- {
+function equilateral ( b ){
     if ( b > 2 && b < 11 ) {
         for ( let i = 1; i <= b; i++ ){
             let s = "";
