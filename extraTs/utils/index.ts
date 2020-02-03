@@ -1,3 +1,3 @@
 import { hasPermissions } from './permission';
-import validateuser from  './validation';
+import validateuser from './validation';
 export { validateuser, hasPermissions };
