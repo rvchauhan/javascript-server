@@ -1,6 +1,5 @@
 interface Iconfig {
-    port : string;
-    env : string;
-
+    port: string;
+    env: string;
 }
 export default Iconfig;
