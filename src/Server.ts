@@ -1,16 +1,10 @@
 import { server } from "typescript";
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
-import { Request } from 'express';
 import notFoundRoutes from './libs/routes/notFoundRoute'
-import errorHandler from './libs/routes/errorHandler'
-interface User {
-  id: string;
-  name: string;
-}
-interface NewRequest extends Request {
-  user: User;
-}
+import errorHandler from './libs/routes/errorHandler';
+import { NewRequest} from '../extraTs/interfaces';
+
 class Server {
   private app: express.Application;
   constructor(private config) {

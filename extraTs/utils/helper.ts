@@ -1,5 +1,4 @@
-function validateEmail(b) 
-{
+function validateEmail(b: string): boolean {
     const regex = /([a-zA-z0-9\+_.@])+@successive.tech/gm;
     return regex.test(b);
 }

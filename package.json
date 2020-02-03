@@ -14,7 +14,7 @@
     "src": "tsc-watch --project . --onSuccess \"npm run nodemon\"",
     "start:extra": "babel-node extra",
     "start:extraTs": "tsc-watch --project . --onSuccess \"npm run nodemon\"",
-    "nodemon": "nodemon ./dist/index.js",
+    "nodemon": "nodemon ./dist/src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "./node_modules/tslint/bin/tslint -c tslint.json -p tsconfig.json --exclude 'node_modules/**/*.{j,t}s'",
     "lint:fix": "npm run lint --fix"
@@ -30,7 +30,6 @@
     "@babel/core": "^7.8.3",
     "@babel/node": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
-    "Express": "^3.0.1",
     "commitizen": "^4.0.3",
     "dotenv": "^8.2.0",
     "husky": "^4.2.1",
