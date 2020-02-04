@@ -11,7 +11,7 @@ interface User {
 interface NewRequest extends Request {
     user: User;
 }
-class Server {
+class Server { 
     private app: express.Application;
     constructor(private config) {
         this.app = express();
