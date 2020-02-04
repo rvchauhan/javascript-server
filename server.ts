@@ -2,8 +2,8 @@ import { server } from "typescript";
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import { Request } from 'express';
-import notFoundRoutes from './src/libs/routes/notFoundRoute'
-import errorHandler from './src/libs/routes/errorHandler'
+import notFoundRoutes from './src /libs/routes/notFoundRoute'
+import errorHandler from './src /libs/routes/errorHandler'
 
 interface User 
 {
