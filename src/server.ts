@@ -1,7 +1,7 @@
 import { server } from "typescript";
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
-import { User, NewRequest } from '../extraTs/interfaces'
+import { NewRequest } from '../extraTs/interfaces'
 import notFoundRoutes from './libs/routes/notFoundRoute';
 import errorHandler from './libs/routes/errorHandler';
 import mainRouter from './router';

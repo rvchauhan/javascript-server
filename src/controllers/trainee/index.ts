@@ -1,2 +1,3 @@
-export {default as TraineeController } from './Controller';
-export {default as traineeRouter} from './routes';
+import  TraineeController  from './Controller';
+import traineeRouter from './routes';
+export {TraineeController,traineeRouter}
