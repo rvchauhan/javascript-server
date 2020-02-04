@@ -12,7 +12,7 @@ function equilateral(b: number): void {
                 if (k % 2 == 0)
                     s = s + "*";
                 else
-                    s = s + " "
+                    s = s + " ";
             }
             console.log(s);
         }
