@@ -43,7 +43,7 @@ class Server {
         id: ' 1 ',
         name: ' Node '
       }
-      res.send(' OK ')
+      res.send('OK')
     });
     app.use('/api', mainRouter);
     app.use(notFoundRoutes);

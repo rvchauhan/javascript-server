@@ -23,7 +23,11 @@
         "dist"
     ],
     "include": [
+<<<<<<< HEAD
        "src"
+=======
+        "src**/*"
+>>>>>>> fda28ee36e9a4791a76225460605590ef17bebcb
     ],
     "types": [
         "src/types"

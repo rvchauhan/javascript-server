@@ -1,7 +1,4 @@
-// let n = Number(process.argv[2]);
-// equilateral(n);
 function equilateral(b: number): void {
-    //let n = prompt("enter value of n");
     if (b > 2 && b < 11) {
         for (let i: number = 1; i <= b; i++) {
             let s: string = "";
@@ -12,7 +9,7 @@ function equilateral(b: number): void {
                 if (k % 2 == 0)
                     s = s + "*";
                 else
-                    s = s + " "
+                    s = s + " ";
             }
             console.log(s);
         }

@@ -8,7 +8,6 @@ function diamond(n: number): void {
                 b = b + "* ";
             console.log(b);
         }
-
         for (let i = n - 1; i > 0; i--) {
             let b: string = " ";
             for (let j = 0; j < n - i; j++)
@@ -21,4 +20,4 @@ function diamond(n: number): void {
         console.log(" wrong input ");
     }
 }
-export default diamond; 
+export default diamond;
