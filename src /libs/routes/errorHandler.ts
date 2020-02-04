@@ -1,13 +1,12 @@
-
-const errorHandler = (err, req, res, next)=> {
+const errorHandler = (err, req, res, next) => {
     console.log('Error', err);
-    res.send({ 
+    res.send({
         error: err.error,
         status: err.code,
         message: err.error || err.message,
         timestamp: new Date()
     })
-    if(!req.headerSent){
+    if (!req.headerSent) {
         res.send(err);
     }
 }
