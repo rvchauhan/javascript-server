@@ -5,13 +5,6 @@ import { Request } from 'express';
 import notFoundRoutes from './libs/routes/notFoundRoute'
 import errorHandler from './libs/routes/errorHandler'
 import Iconfig from "./config/IConfig";
-interface User {
-    id: string;
-    name: string;
-}
-interface NewRequest extends Request {
-    user: User;
-}
 class Server {
     private app: express.Application;
     constructor(private config: Iconfig) {
@@ -42,14 +35,6 @@ class Server {
             console.log('Inside health check');
             res.send('I am OK');
         });
-        app.use('/api', (req: NewRequest, res, next) => {
-            console.log("inside Middleware");
-            req.user = {
-                id: '1',
-                name: 'Node'
-            }
-            res.send('OK')
-        })
         app.use(notFoundRoutes);
         app.use(errorHandler);
         return this;
