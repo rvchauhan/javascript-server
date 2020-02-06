@@ -20,4 +20,4 @@ function diamond(n: number): void {
         console.log(" wrong input ");
     }
 }
-export default diamond; 
+export default diamond;

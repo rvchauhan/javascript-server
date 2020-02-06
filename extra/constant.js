@@ -20,4 +20,4 @@ let users = [
         reviewerEmail: "reviewer3@successive.tech"
     }
 ]
-export { users , permissions }
+export { users, permissions }
