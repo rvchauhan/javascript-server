@@ -22,14 +22,16 @@ const validation = {
       },
       custom: function (value) {
         console.log('Value', value);
+        if(!value){
         throw {
           error: 'Error Occured', message: 'Message'
         }
       }
+      }
     },
     name: {
       required: true,
-      regex: /^[A-Z][a-z]{2,30}$/,
+      regex: '^[a-zA-Z\\s]*$',
       in: ['body'],
       errorMessage: {
         Error: {
@@ -115,7 +117,7 @@ const validation = {
       in: ['body'],
       required: true,
       isObject: true,
-      errorMessage: {
+      errorMessage: { 
         Error: {
           error: "dataToUpdate is required",
           message: "dataToUpdate is required",
@@ -131,9 +133,11 @@ const validation = {
       },
       custom: function (dataToUpdate) {
         console.log('Value', dataToUpdate);
+        if(!dataToUpdate){
         throw {
           error: 'Error Occured', message: 'Message'
         }
+      }
       },
     }
   }
