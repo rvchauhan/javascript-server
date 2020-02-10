@@ -29,12 +29,12 @@ import { isNamedExports } from 'typescript';
           if (objectkeys.regex) {
             const reg=new RegExp(objectkeys.regex);
             if (!reg.test(value)) {
-              arrayName.push(`${element} is invalid`);
+              arrayName.push(objectkeys.errorMessage||`${element} is invalid`);
             }
           }
           if (objectkeys.number) {
             if ((objectkeys.number) && isNaN(value) && value) {
-              arrayName.push(`${element} should be of type number`);
+              arrayName.push(objectkeys.errorMessage|| `${element} should be of type number`);
             }
           }
           if (objectkeys.default) {
