@@ -1,4 +1,5 @@
-const validation = {
+
+export default {
   create:
   {
     id:
@@ -6,140 +7,64 @@ const validation = {
       required: true,
       string: true,
       in: ['body'],
-      errorMessage: {
-        Error: {
-          error: "Id is required",
-          message: "Id is required",
-          timestamp: new Date(),
-          status: 403,
-        },
-        typeError: {
-          error: "ID and name should be of string type",
-          message: "ID and name should be of string type",
-          timestamp: new Date(),
-          status: 403,
-        }
-      },
-      custom: function (value) {
+      // tslint:disable-next-line:object-literal-shorthand
+      custom: (value: number) => {
         console.log('Value', value);
-        if (!value) {
-          throw {
-            error: 'Error Occured', message: 'Message'
-          }
-        }
       }
     },
-    name: {
+    name:
+    {
       required: true,
-      regex: '^[a-zA-Z\\s]*$',
+      regex: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/,
       in: ['body'],
-      errorMessage: {
-        Error: {
-          error: "Name is required",
-          message: "Name is required",
-          timestamp: new Date(),
-          status: 403,
-        },
-        regexError: {
-          error: "Regex did not match",
-          message: "Regex did not match",
-          timestamp: new Date(),
-          status: 403,
-        }
-      }
+      errorMessage: 'Name is required',
     }
   },
-  delete: {
-    id: {
+  delete:
+  {
+    id:
+    {
       required: true,
-      errorMessage: {
-        idError: {
-          error: "Id is required",
-          message: "Id is required",
-          timestamp: new Date(),
-          status: 500,
-        }
-      },
+      errorMessage: 'Id is required',
       in: ['params']
     }
   },
-  get: {
-    skip: {
+  get:
+  {
+    skip:
+    {
       required: false,
       default: 0,
       number: true,
       in: ['query'],
-      errorMessage: {
-        typeError: {
-          error: "Skip should be of type number",
-          message: "Skip should be of type number",
-          timestamp: new Date(),
-          status: 403,
-        }
-      }
+      errorMessage: 'Skip is invalid',
     },
-    limit: {
+    limit:
+    {
       required: false,
       default: 10,
       number: true,
       in: ['query'],
-      errorMessage: {
-        typeError: {
-          error: "Limit should be of type number",
-          message: "Limit should be of type number",
-          timestamp: new Date(),
-          status: 403,
-        }
-      }
+      errorMessage: 'Limit is invalid',
     }
   },
-  update: {
-    id: {
+  update:
+  {
+    id:
+    {
       required: true,
       string: true,
-      in: ['body'],
-      errorMessage: {
-        Error: {
-          error: "Id is required",
-          message: "Id is required",
-          timestamp: new Date(),
-          status: 403,
-        },
-        typeError: {
-          error: "ID should be of string type and dataToUpadte should be of type object",
-          message: "ID should be of string type and dataToUpadte should be of type object",
-          timestamp: new Date(),
-          status: 403,
-        }
-      }
+      in: ['body']
     },
-    dataToUpdate: {
+    dataToUpdate:
+    {
       in: ['body'],
       required: true,
       isObject: true,
-      errorMessage: {
-        Error: {
-          error: "dataToUpdate is required",
-          message: "dataToUpdate is required",
-          timestamp: new Date(),
-          status: 403,
-        },
-        typeError: {
-          error: "ID should be of string type and dataToUpadte should be of type object",
-          message: "ID should be of string type and dataToUpadte should be of type object",
-          timestamp: new Date(),
-          status: 403,
-        }
-      },
-      custom: function (dataToUpdate) {
-        console.log('Value', dataToUpdate);
-        if (!dataToUpdate) {
-          throw {
-            error: 'Error Occured', message: 'Message'
-          }
-        }
+      // tslint:disable-next-line:object-literal-shorthand
+      custom: (dataToUpdate: any) => {
+        console.log(dataToUpdate);
       },
     }
   }
-}
-export default validation;
+};
