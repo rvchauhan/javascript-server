@@ -11,8 +11,6 @@ export default (module, permissionytype) => async (req: Request, res: Response, 
     const decodeUser = await jwt.verify(token, secretKey);
     console.log(decodeUser);
     console.log("------------INSIDEAUTHMIDDLEWARE------------", module, permissionytype);
-
-
     if (!decodeUser) {
       next({
         status: 404,

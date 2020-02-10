@@ -7,7 +7,6 @@ const permissions: Ipermissions = {
         delete: [],
     }
 };
-
 let users: Iusers[] = [{
     traineeEmail: "trainee1@successive.tech",
     reviewerEmail: "reviewer1@successive.tech"
