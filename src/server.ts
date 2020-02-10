@@ -5,6 +5,9 @@ import { NewRequest } from '../extraTs/interfaces'
 import notFoundRoutes from './libs/routes/notFoundRoute';
 import errorHandler from './libs/routes/errorHandler';
 import mainRouter from './router';
+import { config } from 'dotenv';
+import Database from '../src/libs/Database'
+
 class Server {
   private app: express.Application;
   constructor(private config) {
@@ -15,15 +18,18 @@ class Server {
     this.setupRoutes();
     return this;
   }
-  run = () => {
-    const { app, config: { port } } = this;
-    app.listen(port, (err) => {
-      if (err) {
-        throw err;
-      }
-      console.log(` App is running successfuly on port ${port} `);
+  run = (): void => {
+    const { app, config: { port, mongoDBUri } } = this;
+    Database.open(mongoDBUri).then(()=>{
+    this.app.listen(this.config.port, (err) => {
+    if (err) {
+    console.log('error');
+    throw err;
+    }
+    console.log('App is running successfully on port ' + port);
+    });
     })
-  }
+    };
   initBodyParser = () => {
     const { app } = this;
     app.use(bodyParser.urlencoded({ extended: false }))
