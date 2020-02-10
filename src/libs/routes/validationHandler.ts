@@ -5,14 +5,12 @@ import { isNamedExports } from 'typescript';
     const arrayName = [];
     const Keys = Object.keys(config);
     Keys.forEach(element => {
-     
       const objectkeys = config[element];
       const ekeys = (Object.keys(objectkeys));
       const values = (objectkeys['in'].map(inside => req[inside][element]))
         .filter(ele => ele);
-      const inValue = (objectkeys['in']);
+              const inValue = (objectkeys['in']);
       const data = req[inValue];
-      const datakeys = Object.keys(data)
       let value = values.length ? values[0] : undefined;
       if (ekeys.includes('required')) {
         if (objectkeys.required && !value) {
@@ -31,7 +29,7 @@ import { isNamedExports } from 'typescript';
           if (objectkeys.regex) {
             const reg=new RegExp(objectkeys.regex);
             if (!reg.test(value)) {
-              arrayName.push(`${element} is inavalid`);
+              arrayName.push(`${element} is invalid`);
             }
           }
           if (objectkeys.number) {
