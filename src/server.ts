@@ -20,16 +20,16 @@ class Server {
   }
   run = (): void => {
     const { app, config: { port, mongoDBUri } } = this;
-    Database.open(mongoDBUri).then(()=>{
-    this.app.listen(this.config.port, (err) => {
-    if (err) {
-    console.log('error');
-    throw err;
-    }
-    console.log('App is running successfully on port ' + port);
-    });
+    Database.open(mongoDBUri).then(() => {
+      this.app.listen(this.config.port, (err) => {
+        if (err) {
+          console.log('error');
+          throw err;
+        }
+        console.log('App is running successfully on port ' + port);
+      });
     })
-    };
+  };
   initBodyParser = () => {
     const { app } = this;
     app.use(bodyParser.urlencoded({ extended: false }))
