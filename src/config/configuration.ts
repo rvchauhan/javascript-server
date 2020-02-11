@@ -6,5 +6,4 @@ const configuration: Iconfig = Object.freeze({
   env: process.env.NODE_ENV,
   secretKey : process.env.SECRET_KEY
 })
-console.log("L::::::::::::", configuration);
 export default configuration;
