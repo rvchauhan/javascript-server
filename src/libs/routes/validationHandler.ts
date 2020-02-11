@@ -1,126 +1,63 @@
 import { Request, Response, NextFunction } from 'express';
-
-function isEmpty(obj) {
-  for (var prop in obj) {
-    if (obj.hasOwnProperty(prop))
-      return false;
-  }
-
-  return true;
-}
-
-function isString(value) {
-  return typeof value === 'string' || value instanceof String;
-}
-
-function isObject(value) {
-  return value && typeof value === 'object' && value.constructor === Object;
-}
-
-function isNumber(value) {
-  return typeof value === 'number' && isFinite(value);
-}
-
-export default function (config) {
-  //console.log(config);
+import { isNamedExports } from 'typescript';
+const validationHandler = function (config) {
   return function (req: Request, res: Response, next: NextFunction) {
     const arrayName = [];
-    if (req.method.match('GET')) {
-      const getKeys = Object.keys(config);
-      getKeys.forEach(element => {
-        config[element].in.map((value) => {
-          if (!(isEmpty(req[value]))) {
-            if (!req[value][element]) {
-              req[value][element] = config[element].default;
-            }
-            else {
-              (!isNaN(req[value][element])) ? (console.log(`${element} is of type number`), req[value][element] = parseInt(req[value][element])) : arrayName.push(config[element].errorMessage.typeError);
-            }
-          }
-
-        })
-      });
-      console.log(req.query);
-    }
-    else if (req.method.match('POST')) {
-      const createKeys = Object.keys(config);
-      console.log(createKeys);
-      createKeys.forEach(element => {
-        config[element].in.map((value) => {
-          if (!(isEmpty(req[value]))) {
-            if (req[value][element]) {
-              console.log(`${element} is there`);
-
-              (isString(req[value][element])) ? console.log(`${element} is of string type`) : arrayName.push(config[element].errorMessage.typeError);
-
-              if (element === 'name') {
-                (config.name.regex.test(req[value][element])) ? console.log("Regex validation is right") : arrayName.push(config[element].errorMessage.regexError)
-              }
-            }
-            else {
-              arrayName.push(config[element].errorMessage.Error);
+    const Keys = Object.keys(config);
+    Keys.forEach(element => {
+      const objectkeys = config[element];
+      const ekeys = (Object.keys(objectkeys));
+      const values = (objectkeys['in'].map(inside => req[inside][element]))
+        .filter(ele => ele);
+      const inValue = (objectkeys['in']);
+      const data = req[inValue];
+      let value = values.length ? values[0] : undefined;
+      if (ekeys.includes('required')) {
+        if (objectkeys.required && !value) {
+          next({
+            error: `${element} is required`,
+            message: `${element} is required `,
+            status: '422'
+          });
+        } else {
+          if (objectkeys.string) {
+            if ((objectkeys.string) && typeof value !== 'string') {
+              arrayName.push(objectkeys.errorMessage || `${element} should be of type string`);
             }
           }
-        })
-      });
-      console.log(req.body);
-    }
-  else if (req.method.match('PUT')) {
-      const updateKeys = Object.keys(config);
-      console.log(updateKeys);
-      updateKeys.forEach(element => {
-        config[element].in.map((value) => {
-          if (!(isEmpty(req[value]))) {
-
-            if (req[value][element]) {
-              console.log(`${element} is there`);
-              if (config[element].string) {
-                if (isString(req[value][element])) {
-                  console.log(`${element} is of correct type`);
-                }
-                else {
-                  arrayName.push(config[element].errorMessage.typeError);
-                }
-              }
-              if (config[element].isObject) {
-                if (isObject(req[value][element])) {
-                  console.log(`${element} is of correct type`);
-                }
-                else {
-                  arrayName.push(config[element].errorMessage.typeError);
-                }
-              }
-            }
-            else {
-              arrayName.push(config[element].errorMessage.Error);
+          if (objectkeys.regex) {
+            const reg = new RegExp(objectkeys.regex);
+            if (!reg.test(value)) {
+              arrayName.push(objectkeys.errorMessage || `${element} is invalid`);
             }
           }
-        })
-      })
-      console.log(req.body)
-    }
-else if (req.method.match('DELETE')) {
-      const deleteKeys = Object.keys(config);
-      deleteKeys.forEach(element => {
-        config[element].in.map((value) => {
-          if ((req[value][element])) {
-            console.log(`${element} is there`);
+          if (objectkeys.number) {
+            if ((objectkeys.number) && isNaN(value) && value) {
+              arrayName.push(objectkeys.errorMessage || `${element} should be of type number`);
+            }
           }
-
-          else {
-            arrayName.push(config[element].errorMessage.Error);
+          if (objectkeys.default) {
+            if (value == '' || value == undefined) {
+              value = objectkeys.default;
+            }
           }
-        })
-      });
+          if (objectkeys.custom) {
+            objectkeys.custom(value)
+          }
+          if (objectkeys.isObject) {
+            if ((objectkeys.isObject) && typeof value.isObject) {
+              arrayName.push(objectkeys.errorMessage || `${element} should be of object type`)
+            }
+          }
+        }
+      }
+    });
+    if (arrayName.length) {
+      next(arrayName);
     }
     else {
-      console.log("error")
-    }
- if (!arrayName.length) {
       next();
     }
-    else {
-      return next(arrayName);
-    }
-  };
+  }
 }
+export default validationHandler
