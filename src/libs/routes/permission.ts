@@ -1,9 +1,10 @@
 import permissions from './constant';
 import { IgetUsers } from "../../../extraTs/interfaces"
-function hasPermissions(module: IgetUsers, role: string, permissionType: string) {
-    let k: any = module[permissionType];
+function hasPermissions(modul: string, role: string, permissionType: string) {
+    const m = permissions[modul];
+    let k: any = m[permissionType];
     return k.some(element => {
-        return element == role;
+        return element === role;
     });
 }
 export { hasPermissions };

@@ -6,7 +6,7 @@ import authmiddleware from './../../libs/routes/authmiddleware'
 const traineeRouter = Router();
 //console.log(validation.create);
 traineeRouter.route('/trainee')
-  .get(authmiddleware('getUsers', 'read'), validationHandler(validation.get), TraineeController.create)
+  .get(authmiddleware('getUsers', 'write'), validationHandler(validation.get), TraineeController.create)
   .post(authmiddleware('getUsers', 'write'), validationHandler(validation.create), TraineeController.list)
   .put( authmiddleware('getUsers', 'write'),validationHandler(validation.update), TraineeController.put)
 traineeRouter.delete('/trainee/:id', authmiddleware('getUsers', 'write'),validationHandler(validation.delete), TraineeController.delete);
