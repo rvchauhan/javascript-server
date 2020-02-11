@@ -43,11 +43,11 @@ class UserController {
         }
     };
     update = (req: Request, res: Response, next: NextFunction) => {
-        console.log("**")
+        console.log("*************")
         try {
             console.log('------------INSIDE UPDATE TRAINEE-------------');
             const { id, dataToUpdate } = req.body;
-            this.userRepository.update( id , dataToUpdate).then(User => {
+            this.userRepository.update({ _id: id }, dataToUpdate).then(User => {
                 this.userRepository.findone({ _id: id })
                     .then(user => {
                         return SystemResponse.success(res, user, 'Updated user');
@@ -70,7 +70,7 @@ class UserController {
             this.userRepository.delete({ _id: id }).then(user => {
                 console.log('*********', user);
             });
-        }catch(err){
+        } catch (err) {
             throw err;
         }
     };

@@ -38,7 +38,7 @@ const validation = {
       in: ['body'],
       errorMessage: 'email is required',
     },
-    hobbies : {
+    hobbies: {
       required: true,
       array: 'string',
       in: ['body'],
@@ -131,8 +131,10 @@ const validation = {
       },
       custom: function (dataToUpdate) {
         console.log('Value', dataToUpdate);
-        throw {
-          error: 'Error Occured', message: 'Message'
+        if (!dataToUpdate) {
+          throw {
+            error: 'Error Occured', message: 'Message'
+          }
         }
       },
     }
