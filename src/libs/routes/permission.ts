@@ -1,9 +1,10 @@
 import permissions from './constant';
-export default function hasPermission(moduleName: string, role: string, permissionType: string): boolean {
-    for (let i = 0; i < permissions[moduleName][permissionType].length; i++) {
-        if (permissions[moduleName][permissionType][i].match(role)) {
-            return true;
-        }
-    }
-    return false;
-} 
+import { IgetUsers } from "../../../extraTs/interfaces"
+function hasPermissions(modul: string, role: string, permissionType: string) {
+    const m = permissions[modul];
+    let k: any = m[permissionType];
+    return k.some(element => {
+        return element === role;
+    });
+}
+export default hasPermissions ;
