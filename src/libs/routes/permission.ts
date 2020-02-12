@@ -7,4 +7,4 @@ function hasPermissions(modul: string, role: string, permissionType: string) {
         return element === role;
     });
 }
-export { hasPermissions };
+export default hasPermissions ;

@@ -19,13 +19,13 @@ const validation = {
       in: ['body'],
       errorMessage: 'mobile number required',
     },
-    // role: {
-    //   required: true,
-    //   string: true,
-    //   in: ['body'],
-    //   errorMessage: 'Please enter role'
+    role: {
+      required: true,
+      string: true,
+      in: ['body'],
+      errorMessage: 'Please enter role'
 
-    // },
+    },
     dob: {
       required: true,
       string: true,

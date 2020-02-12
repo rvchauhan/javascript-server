@@ -45,7 +45,7 @@ const validationHandler = function (config) {
             objectkeys.custom(value)
           }
           if (objectkeys.isObject) {
-            if ((objectkeys.isObject) && typeof value.isObject) {
+            if ((objectkeys.isObject) && typeof value !=='object') {
               arrayName.push(objectkeys.errorMessage || `${element} should be of object type`)
             }
           }
