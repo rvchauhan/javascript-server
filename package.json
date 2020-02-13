@@ -16,7 +16,7 @@
     "nodemon": "nodemon ./dist/src/index.js",
     "src": "tsc-watch --project . --onSuccess \"npm run nodemon\"",
     "start:extra": "babel-node extra",
-    "start:extraTs": "tsc-watch --project . --onSuccess \"npm run nodemon\"",
+    "start": "tsc-watch --project . --onSuccess \"npm run nodemon\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ravi",

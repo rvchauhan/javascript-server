@@ -7,7 +7,6 @@ import errorHandler from './libs/routes/errorHandler';
 import mainRouter from './router';
 import { config } from 'dotenv';
 import Database from '../src/libs/Database'
-
 class Server {
   private app: express.Application;
   constructor(private config) {
@@ -20,16 +19,19 @@ class Server {
   }
   run = (): void => {
     const { app, config: { port, mongoDBUri } } = this;
-    Database.open(mongoDBUri).then(()=>{
-    this.app.listen(this.config.port, (err) => {
-    if (err) {
-    console.log('error');
-    throw err;
-    }
-    console.log('App is running successfully on port ' + port);
-    });
+    Database.open(mongoDBUri).then(() => {
+      this.app.listen(this.config.port, (err) => {
+        if (err) {
+          console.log('error');
+          throw err;
+        }
+        console.log('App is running successfully on port ' + port);
+      });
     })
-    };
+      .catch((err) => {
+        console.log("Mongo is not connected")
+      })
+  };
   initBodyParser = () => {
     const { app } = this;
     app.use(bodyParser.urlencoded({ extended: false }))

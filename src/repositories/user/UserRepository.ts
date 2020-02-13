@@ -1,29 +1,31 @@
 import * as mongoose from 'mongoose'
 import IUserModel from './IUserModel'
-import { userModel, } from './UserModel'
+import { userModel, userSchema, } from './UserModel'
 import Iusercreate from '../entities/Iusercreate';
-class UserRepository {
-  private userModel: mongoose.Model<IUserModel>;
+import VersionableRepository from '../versionable/VersionableRepository'
+class UserRepository extends VersionableRepository<IUserModel, mongoose.Model<IUserModel>> {
+  private userModel: mongoose.Model<IUserModel>
   constructor() {
+    super(userModel)
     this.userModel = userModel;
   }
   create = (data: Iusercreate) => {
-    return this.userModel.create(data)
-  }
+    return super.create(data)
+  };
   count = () => {
-    return this.userModel.countDocuments();
-  }
+    return super.count();
+  };
   findone = (data) => {
-    return this.userModel.findById(data);
-  }
+    return super.findOne(data);
+  };
   update = (id, data) => {
-    return this.userModel.updateOne(id, data);
-  }
+    return super.update(id, data);
+  };
   list = () => {
-    return this.userModel.find();
-  }
+    return userModel.find();
+  };
   delete = (id) => {
-    return this.userModel.findByIdAndDelete(id);
-  }
+    return super.delete(id);
+  };
 }
 export default UserRepository

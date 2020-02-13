@@ -12,10 +12,14 @@ class Database {
               reject(err);
             }
             resolve();
-            SeedData();
-            console.log("DB is connected successfully");
-          }
-        )
+            SeedData()
+              .then(() => {
+                resolve(console.log("DB is connected successfully"));
+              })
+              .catch(() => {
+                console.log("DB is connected successfully");
+              })
+          })
         .catch(error => console.log(error));
     });
   };

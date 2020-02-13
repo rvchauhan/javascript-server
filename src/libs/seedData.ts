@@ -1,6 +1,7 @@
 import UserRepository from '../repositories/user/UserRepository'
 const userRepository= new UserRepository
 export default () => {
+  return new Promise((resolve, reject) => {
   const user = {
     "name": 'trainee',
     "address": 'Noida',
@@ -17,10 +18,19 @@ export default () => {
       return userRepository.create(user)
         .then((res) => {
         console.log('User added successfully',res);
+        return resolve()
       });
+    
+}
+else{
+  return reject()
 }
 console.log('User already exist');
   })
 .catch(err=> console.log(err))
-};
+  
+  
+});
+
+}
 
