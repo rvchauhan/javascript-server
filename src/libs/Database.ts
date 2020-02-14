@@ -1,27 +1,16 @@
 import * as mongoose from "mongoose";
 import SeedData from './seedData'
 class Database {
-  static open = (mongoURL: string) => {
-    return new Promise((resolve, reject) => {
-      mongoose
-        .connect(mongoURL,
-          { useNewUrlParser: true, useUnifiedTopology: true },
-          err => {
-            if (err) {
-              console.log("Error in mongoDB connection");
-              reject(err);
+  static open = async (mongoURL: string) => {
+     const dbConnection= await mongoose.connect(mongoURL,{ useNewUrlParser: true, useUnifiedTopology: true })
+            if(dbConnection) {
+              console.log("DB is connected successfully");
             }
-            resolve();
-            SeedData();
-            console.log("DB is connected successfully");
+           return await SeedData();
           }
-        )
-        .catch(error => console.log(error));
-    });
-  };
   static disconnect = () => {
-    mongoose.connection.close();
     console.log("Disconnect mongoDb");
-  };
+    return mongoose.connection.close();
+  }
 }
 export default Database;
