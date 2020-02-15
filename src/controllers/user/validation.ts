@@ -1,4 +1,4 @@
-const validation = {
+export default {
   create:
   {
     name: {
@@ -46,98 +46,50 @@ const validation = {
 
     }
   },
-
-  delete: {
-    id: {
+  delete:
+  {
+    id:
+    {
       required: true,
-      errorMessage: {
-        idError: {
-          error: "Id is required",
-          message: "Id is required",
-          timestamp: new Date(),
-          status: 422,
-        }
-      },
+      errorMessage: 'Id is required',
       in: ['params']
     }
   },
-  get: {
-    skip: {
+  get:
+  {
+    skip:
+    {
       required: false,
       default: 0,
       number: true,
       in: ['query'],
-      errorMessage: {
-        typeError: {
-          error: "Skip should be of type number",
-          message: "Skip should be of type number",
-          timestamp: new Date(),
-          status: 422,
-        }
-      }
+      errorMessage: 'Skip is invalid',
     },
-    limit: {
+    limit:
+    {
       required: false,
       default: 10,
       number: true,
       in: ['query'],
-      errorMessage: {
-        typeError: {
-          error: "Limit should be of type number",
-          message: "Limit should be of type number",
-          timestamp: new Date(),
-          status: 422,
-        }
-      }
+      errorMessage: 'Limit is invalid',
     }
   },
-  update: {
-    id: {
+  update:
+  {
+    id:
+    {
       required: true,
       string: true,
-      in: ['body'],
-      errorMessage: {
-        Error: {
-          error: "Id is required",
-          message: "Id is required",
-          timestamp: new Date(),
-          status: 422,
-        },
-        typeError: {
-          error: "ID should be of string type and dataToUpadte should be of type object",
-          message: "ID should be of string type and dataToUpadte should be of type object",
-          timestamp: new Date(),
-          status: 422,
-        }
-      }
+      in: ['body']
     },
-    dataToUpdate: {
+    dataToUpdate:
+    {
       in: ['body'],
       required: true,
       isObject: true,
-      errorMessage: {
-        Error: {
-          error: "dataToUpdate is required",
-          message: "dataToUpdate is required",
-          timestamp: new Date(),
-          status: 422,
-        },
-        typeError: {
-          error: "ID should be of string type and dataToUpadte should be of type object",
-          message: "ID should be of string type and dataToUpadte should be of type object",
-          timestamp: new Date(),
-          status: 422,
-        }
-      },
-      custom: function (dataToUpdate) {
-        console.log('Value', dataToUpdate);
-        if (!dataToUpdate) {
-          throw {
-            error: 'Error Occured', message: 'Message'
-          }
-        }
+      custom: (dataToUpdate: any) => {
+        console.log(dataToUpdate);
       },
     }
   }
-}
-export default validation;
+};

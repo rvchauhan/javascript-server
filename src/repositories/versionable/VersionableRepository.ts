@@ -23,44 +23,43 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
     })
   }
   public update(id, data) {
-    console.log
-    this.modelType
-      .findById(id)
+    console.log(id)
+    this.modelType.findById(id)
       .then(user => {
-        const updatedData = Object.assign(user, data);
-        this.updateAndCreate(updatedData);
-        console.log('before update')
+        const updatedData = { ...user, ...data };
+        this.updateAndCreate(updatedData)
       })
       .catch(error => {
-        throw error;
+        error;
       });
-    const deleteddata = {
-      deletedBy: id,
-      deletedAt: new Date()
-    };
-    return this.modelType.updateOne(id, deleteddata);
+    return this.modelType.updateOne(id, { updatedBy: id });
   }
-  public updateAndCreate(options) {
-    console.log(options);
+  updateAndCreate(updatedData): Promise<D> {
     const id = VersionableRepository.generateObjectId();
+    const newObject = updatedData;
+    delete newObject['_doc']._id;
+    const Userid = newObject['_doc'].originalId;
     return this.modelType.create({
-      originalId: options.originalId,
-      ...options,
+      ...newObject['_doc'],
       _id: id,
-      createdBy: id,
+      originalId: Userid,
+      createdBy: Userid,
       createdAt: new Date(),
       updatedAt: new Date(),
-      updatedBy: options.id
+      updatedBy: Userid
     });
   }
   public list() {
     return this.modelType.find({ deletedAt: undefined })
   }
-public delete(id) {
-  const deleteddata ={
-  deletedBy: id,
-  deletedAt: new Date()
-  };
-  return this.modelType.update( id,deleteddata);
+  async delete(_id) {
+    const Oid = await this.modelType.findOne({ _id })
+    const { originalId } = Oid['_doc'];
+    const deleteddata = {
+      deletedBy: originalId,
+      deletedAt: new Date()
+    }
+    return await this.modelType.update(_id, deleteddata);
   }
+
 }

@@ -3,7 +3,7 @@ import VersionableSchema from './../versionable/VersionableSchema'
 class UserSchema extends VersionableSchema {
   constructor(option) {
     const userSchema = {
-      __id: String,
+      _id: String,
       name: String,
       address: String,
       email: String,
