@@ -27,7 +27,6 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
     this.modelType.findById(id)
       .then(user => {
         const updatedData = Object.assign(user,data);
-        console.log("IIIIIIIIIIIIIIIIII",updatedData)
         this.updateAndCreate(updatedData)
       })
       .catch(error => {
