@@ -11,7 +11,7 @@ class Database {
               console.log("Error in mongoDB connection");
               reject(err);
             }
-            resolve();
+          
             SeedData()
             .then (()=> {
             resolve(console.log("DB is connected successfully"));
@@ -19,6 +19,7 @@ class Database {
             .catch(()=> {
               console.log("DB is connected successfully");
               })
+              resolve();
              } ) });
   };
   static disconnect = () => {
