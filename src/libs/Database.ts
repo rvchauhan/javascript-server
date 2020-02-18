@@ -11,15 +11,16 @@ class Database {
               console.log("Error in mongoDB connection");
               reject(err);
             }
-            resolve();
             SeedData()
-            .then (()=> {
-            resolve(console.log("DB is connected successfully"));
-            }) 
-            .catch(()=> {
-              console.log("DB is connected successfully");
+              .then(() => {
+                resolve(console.log("DB is connected successfully"));
               })
-             } ) });
+              .catch(() => {
+                console.log("DB is connected successfully");
+                resolve();
+              })
+          })
+    });
   };
   static disconnect = () => {
     mongoose.connection.close();

@@ -6,5 +6,6 @@ export default interface Iusermodel extends IVersionableDocuments {
   dob: Date;
   mobile_number: number;
   email: string;
-  hobbies: string[]
+  hobbies: string[],
+  password: string
 }

@@ -11,8 +11,9 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
   count(): mongoose.Query<Number> {
     return this.modelType.countDocuments();
   };
-  findOne(query): mongoose.Query<D> {
-    return this.modelType.findOne(query);
+  async findOne(query) {
+    return await this.modelType.findOne(query);
+
   };
   public create(options): Promise<D> {
     const id = VersionableRepository.generateObjectId();
@@ -26,7 +27,7 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
     console.log(id)
     this.modelType.findById(id)
       .then(user => {
-        const updatedData = { ...user, ...data };
+        const updatedData = Object.assign(user, data);
         this.updateAndCreate(updatedData)
       })
       .catch(error => {

@@ -3,8 +3,11 @@ import * as jwt from 'jsonwebtoken'
 import config from './../../config/configuration'
 import hasPermissions from './permission'
 import permissions from './constant'
-export default (module, permissiontype) => (req: Request, res: Response, next: NextFunction) => {
+import userRepository from '../../repositories/user/UserRepository'
+import IRequest from './IRequest'
+export default (module, permissiontype) => (req: IRequest, res: Response, next: NextFunction) => {
   try {
+    const UserRepository = new userRepository
     console.log("------------INSIDEAUTHMIDDLEWARE------------", module, permissiontype);
     const token: string = req.headers[`authorization`]
     const decodeUser = jwt.verify(token, config.secretKey);
@@ -15,19 +18,24 @@ export default (module, permissiontype) => (req: Request, res: Response, next: N
         message: "Unauthorized "
       });
     }
-    if (['read','write','delete'].includes(permissiontype) && decodeUser['role'] == 'head-trainer') {
-      next();
-    }
-    else {
-      if (!hasPermissions(module, decodeUser['role'], permissiontype)) {
-        next({
-          status: 403,
-          error: "Unauthorized Access",
-          message: "Unauthorized Access"
-        });
+    UserRepository.findone({ 'email': decodeUser['email'] }).then(user => {
+      if (['read', 'write', 'delete'].includes(permissiontype) && decodeUser['role'] == 'head-trainer') {
+        req.user = user;
+        console.log("------------", req.user)
+        next();
       }
-      next();
-    }
+      else {
+        if (!hasPermissions(module, decodeUser['role'], permissiontype)) {
+          next({
+            status: 403,
+            error: "Unauthorized Access",
+            message: "Unauthorized Access"
+          });
+        }
+        req.user = user;
+        next();
+      }
+    })
   }
   catch (error) {
     next({
@@ -37,4 +45,4 @@ export default (module, permissiontype) => (req: Request, res: Response, next: N
       message: "Unauthorized Access"
     });
   }
-}
+};

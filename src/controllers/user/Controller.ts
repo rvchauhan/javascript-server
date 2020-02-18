@@ -1,6 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 import UserRepository from '../../repositories/user/UserRepository';
 import SystemResponse from '../../libs/SystemResponse'
+import IRequest from '../../libs/routes/IRequest'
+import config from '../../config/configuration'
+import bcrypt from 'bcrypt'
 class UserController {
     static instance: UserController;
     static userRepository: UserRepository;
@@ -73,5 +76,37 @@ class UserController {
             throw err;
         }
     };
+    me = async (req: IRequest, res: Response, next: NextFunction) => {
+        try {
+            console.log(":::::::::::::::INSIDE ME::::::::::::::");
+            console.log("req", req.user)
+            return await SystemResponse.success(res, req.user, "your data")
+        }
+        catch (err) {
+            return next({ error: err, message: err });
+        }
+    }
+    login = (req: IRequest, res: Response, next: NextFunction) => {
+        try {
+            console.log("::::::::::::INSIDE LOG IN::::::::::::");
+            this.userRepository.findone({ 'email': req.user['email'], password: req.user['Password'] }).then(user => {
+                const match = bcrypt.compare(config.Password, req.user.password);
+                if (match) {
+                    return SystemResponse.success(res, req.user, " Logged in");
+
+                } else {
+                    console.log("not a User")
+                }
+
+            })
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+
+
+
 }
+
 export default UserController.getInstance();
