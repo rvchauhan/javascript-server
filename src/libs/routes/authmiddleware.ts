@@ -20,12 +20,12 @@ export default (module, permissiontype) => (req: IRequest, res: Response, next: 
       });
     }
     UserRepository.findone({ 'email': decodeUser['email'], '_id': decodeUser['id'] }).then(user => {
-      if (user == null) {
-        next({
-          error: "Unauthorized Access",
-          message: "User doesn't exist"
-        })
-      } else {
+      // if (user == null) {
+      //   next({
+      //     error: "Unauthorized Access",
+      //     message: "User doesn't exist"
+      //   })
+      // } else {
         if (['read', 'write', 'delete'].includes(permissiontype) && decodeUser['role'] == 'head-trainer') {
           req.user = user;
           console.log("------------", req.user)
@@ -41,7 +41,6 @@ export default (module, permissiontype) => (req: IRequest, res: Response, next: 
           }
           next();
         }
-      }
     })
   }
   catch (error) {
