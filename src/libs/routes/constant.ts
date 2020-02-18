@@ -4,7 +4,7 @@ const permissions: Ipermissions = {
         all: ['head-trainer'],
         read: ['trainee', 'trainer'],
         write: ['trainer'],
-        delete: ['head-trainer'],
+        delete: [],
     }
 };
 export default permissions;
