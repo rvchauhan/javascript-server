@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import UserRepository from '../../repositories/user/UserRepository';
 import SystemResponse from '../../libs/SystemResponse'
+import IRequest from '../../libs/routes/IRequest'
 class UserController {
     static instance: UserController;
     static userRepository: UserRepository;
@@ -48,7 +49,7 @@ class UserController {
             const { id, dataToUpdate } = req.body;
             this.userRepository.update({ _id: id }, dataToUpdate).then(user => {
                 return SystemResponse.success(res, user, 'Updated user');
-            }).catch(error => { 
+            }).catch(error => {
                 throw error;
             });
         }
@@ -67,5 +68,15 @@ class UserController {
             throw err;
         }
     };
+    me = async (req: IRequest, res: Response, next: NextFunction) => {
+        try {
+            console.log(":::::::::::::::INSIDE ME::::::::::::::");
+            console.log("req", req.user)
+            return await SystemResponse.success(res, req.user, "your data")
+        }
+        catch (err) {
+            return next({ error: err, message: err });
+        }
+    }
 }
 export default UserController.getInstance();
