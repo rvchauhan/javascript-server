@@ -1,4 +1,4 @@
-import UserController  from './Controller'
+import UserController from './Controller'
 import { Router } from 'express';
 import validation from './validation';
 import validationHandler from '../../libs/routes/validationHandler'
@@ -9,6 +9,7 @@ UserRouter.route('/user')
   .post(authmiddleware('getUsers', 'read'), validationHandler(validation.create), UserController.create)
   .put(authmiddleware('getUsers', 'read'), validationHandler(validation.update), UserController.update)
 UserRouter.delete('/user/:id', authmiddleware('getUsers', 'write'), validationHandler(validation.delete), UserController.delete);
+UserRouter.route('/me').get(authmiddleware('getUsers', 'read'), UserController.me)
 
 export default UserRouter;
 
