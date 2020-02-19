@@ -5,7 +5,6 @@ import hasPermissions from './permission'
 import permissions from './constant'
 import userRepository from '../../repositories/user/UserRepository'
 import IRequest from './IRequest'
-
 export default (module, permissiontype) => (req: IRequest, res: Response, next: NextFunction) => {
   try {
     const UserRepository = new userRepository
@@ -28,10 +27,8 @@ export default (module, permissiontype) => (req: IRequest, res: Response, next: 
       } else {
         if (['read', 'write', 'delete'].includes(permissiontype) && decodeUser['role'] == 'head-trainer') {
           req.user = user;
-          console.log("------------", req.user)
           next();
-        }
-        else {
+        } else {
           if (!hasPermissions(module, decodeUser['role'], permissiontype)) {
             next({
               status: 403,
@@ -44,6 +41,7 @@ export default (module, permissiontype) => (req: IRequest, res: Response, next: 
       }
     })
   }
+
   catch (error) {
     next({
 
@@ -52,4 +50,4 @@ export default (module, permissiontype) => (req: IRequest, res: Response, next: 
       message: "Unauthorized Access"
     });
   }
-}
+};

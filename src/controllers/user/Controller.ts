@@ -2,6 +2,10 @@ import { Request, Response, NextFunction } from 'express';
 import UserRepository from '../../repositories/user/UserRepository';
 import SystemResponse from '../../libs/SystemResponse'
 import IRequest from '../../libs/routes/IRequest'
+import config from '../../config/configuration'
+import * as bcrypt from 'bcrypt'
+import * as jwt from 'jsonwebtoken'
+import { JsonWebTokenError } from 'jsonwebtoken';
 class UserController {
     static instance: UserController;
     static userRepository: UserRepository;
@@ -78,5 +82,32 @@ class UserController {
             return next({ error: err, message: err });
         }
     }
+    login = (req: IRequest, res: Response, next: NextFunction) => {
+        try {
+            console.log("::::::::::::INSIDE LOG IN::::::::::::");
+            const { email, password } = req.body;
+            this.userRepository.findone(email).then(user => {
+                const match = bcrypt.compare(user.password, password);
+                if (match) {
+                    const token = jwt.sign({ id: user.id, email: user.email, exp: Math.floor(Date.now() / 1000) + 15 * 60 }, config.secretKey)
+                    if (!token) {
+                        console.log("token is not generated")
+                    } else {
+                        return SystemResponse.success(res, token, "token generated")
+                    }
+                    return SystemResponse.success(res, req.user, " Logged in");
+                } else {
+                    console.log("not a User")
+                }
+            })
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+
+
+
 }
+
 export default UserController.getInstance();

@@ -1,7 +1,13 @@
 import UserRepository from '../repositories/user/UserRepository'
-const userRepository= new UserRepository
-export default () => {
-  return new Promise((resolve, reject) => {
+import * as bcrypt from 'bcrypt'
+import config from '../config/configuration'
+const userRepository = new UserRepository
+export default async () => {
+  async function encodedPassword(Password) {
+    console.log("::::::::::", Password)
+    return await bcrypt.hash(Password, 10)
+  }
+  const ecncryptPassword = await encodedPassword(config.Password)
   const user = {
     "name": 'trainee',
     "address": 'Noida',
@@ -9,28 +15,21 @@ export default () => {
     "mobile_number": 9717043261,
     "email": 'chauhanravi814@gmail.com',
     "hobbies": ["motovlogging"],
+    "password": ecncryptPassword
   };
   console.log(user);
   userRepository.count().then((count) => {
     console.log('count as', count);
-
     if (!count) {
-      return userRepository.create(user)
+      userRepository.create(user)
         .then((res) => {
-        console.log('User added successfully',res);
-        return resolve()
-      });
-    
-}
-else{
-  return reject()
-}
-console.log('User already exist');
+          console.log('User added successfully', res);
+        });
+    }
+    else {
+      console.log('User already exist');
+    }
   })
-.catch(err=> console.log(err))
-  
-  
-});
-
+    .catch(err => console.log(err))
 }
 
