@@ -6,7 +6,7 @@ export default {
       required: true,
       string: true,
       in: ['body'],
-      regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      regex: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
       errorMessage: 'email is required'
     }
   },

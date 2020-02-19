@@ -15,5 +15,3 @@ UserRouter.route('/me')
 UserRouter.route('/login')
   .post(validationHandler(validation.login), UserController.login);
 export default UserRouter;
-
-  
