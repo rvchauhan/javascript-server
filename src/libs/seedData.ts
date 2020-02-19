@@ -9,9 +9,8 @@ export default () => {
       "address": 'Noida',
       "dob": new Date('12-04-1998'),
       "mobile_number": 9717043261,
-      "email": 'vinay@successive.tech',
+      "email": 'chauhanravi814@gmail.com',
       "hobbies": ["motovlogging"],
-      "password": "trainee@123"
     };
     console.log(user);
     userRepository.count().then((count) => {
@@ -30,10 +29,10 @@ export default () => {
       }
       else {
         resolve()
+        console.log('User already exist');
       }
-      console.log('User already exist');
     })
-      .catch(err => reject(err))
+      .catch(err => console.log(err))
   });
 
 }

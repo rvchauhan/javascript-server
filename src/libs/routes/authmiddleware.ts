@@ -18,25 +18,30 @@ export default (module, permissiontype) => (req: IRequest, res: Response, next: 
         message: "Unauthorized "
       });
     }
-    UserRepository.findone({ 'email': decodeUser['email'] }).then(user => {
-      if (['read', 'write', 'delete'].includes(permissiontype) && decodeUser['role'] == 'head-trainer') {
-        req.user = user;
-        console.log("------------", req.user)
-        next();
-      }
-      else {
-        if (!hasPermissions(module, decodeUser['role'], permissiontype)) {
-          next({
-            status: 403,
-            error: "Unauthorized Access",
-            message: "Unauthorized Access"
-          });
+    UserRepository.findone({ 'email': decodeUser['email'], '_id': decodeUser['id'] }).then(user => {
+      if (user == null) {
+        next({
+          error: "Unauthorized Access",
+          message: "User doesn't exist"
+        })
+      } else {
+        if (['read', 'write', 'delete'].includes(permissiontype) && decodeUser['role'] == 'head-trainer') {
+          req.user = user;
+          next();
+        } else {
+          if (!hasPermissions(module, decodeUser['role'], permissiontype)) {
+            next({
+              status: 403,
+              error: "Unauthorized Access",
+              message: "Unauthorized Access"
+            });
+          }
+          next();
         }
-        req.user = user;
-        next();
       }
     })
   }
+
   catch (error) {
     next({
 
