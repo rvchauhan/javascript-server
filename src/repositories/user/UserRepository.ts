@@ -18,11 +18,10 @@ class UserRepository extends VersionableRepository<IUserModel, mongoose.Model<IU
     return await super.findOne(data);
   };
   update(id, data) {
-
     return super.update(id, data);
   };
-  list() {
-    return userModel.find();
+  list(skip,limit,sortby) {
+    return super.list(skip,limit,sortby);
   };
   delete(id) {
     return super.delete(id);

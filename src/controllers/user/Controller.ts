@@ -36,7 +36,8 @@ class UserController {
     list = (req: Request, res: Response, next: NextFunction) => {
         try {
             console.log('-------------INSIDE LIST TRAINEE----------- ');
-            this.userRepository.list().then(user => {
+            const {skip,limit,sortby}=req.query
+            this.userRepository.list(Number(skip),Number(limit),sortby).then(user => {
                 console.log(user);
                 return SystemResponse.success(res, user, 'Users List');
             }).catch(error => {

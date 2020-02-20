@@ -18,7 +18,7 @@ export default (module, permissiontype) => (req: IRequest, res: Response, next: 
         message: "Unauthorized "
       });
     }
-    UserRepository.findone({ 'email': decodeUser['email'], '_id': decodeUser['id'] }).then(user => {
+    UserRepository.findone({ 'email': decodeUser['email'], '_id': decodeUser['id'],deletedAt: undefined  }).then(user => {
       if (user == null) {
         next({
           error: "Unauthorized Access",
