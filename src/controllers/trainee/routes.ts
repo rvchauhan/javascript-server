@@ -7,11 +7,9 @@ import UserRouter from '../user/routes';
 const traineeRouter = Router();
 //console.log(validation.create);
 traineeRouter.route('/trainee')
-UserRouter.route('/user')
   .get(authmiddleware('getUsers', 'write'), validationHandler(validation.get), TraineeController.create)
   .post(authmiddleware('getUsers', 'write'), validationHandler(validation.create), TraineeController.list)
-  .put(authmiddleware('getUsers', 'write'), validationHandler(validation.update), TraineeController.put)
+  .put(authmiddleware('getUsers', 'write'), validationHandler(validation.update), TraineeController.update)
 traineeRouter.delete('/trainee/:id', authmiddleware('getUsers', 'write'), validationHandler(validation.delete), TraineeController.delete);
-UserRouter.route('/me').get(authmiddleware('getUsers', 'read'), validationHandler(validation.get), TraineeController.create)
 export default traineeRouter;
 

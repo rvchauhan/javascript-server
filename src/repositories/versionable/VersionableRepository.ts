@@ -17,15 +17,15 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
   public create(options): Promise<D> {
     const id = VersionableRepository.generateObjectId();
     return this.modelType.create({
+      ...options,
       _id: id,
       originalId: options.id,
-      createdBy: options.d,
-      ...options
+      createdBy: options.id
+      
     })
   }
   public async update(id, data) {
     let record = await this.findOne(id);
-    this.delete(id);
     this.create({
       ...record,
       ...data,
@@ -37,7 +37,7 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
     return await this.modelType.find({ deletedAt: undefined }).limit(limit).skip(skip).sort(sortBy)
   }
   async delete(id) {
-    return await this.modelType.update(id, { deletedAt: new Date()});
+    return await this.modelType.update(id, { deletedAt: new Date() });
   }
 
 }

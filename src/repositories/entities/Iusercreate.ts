@@ -5,4 +5,5 @@ export default interface Iusercreate {
   mobile_number: number;
   email: string;
   hobbies: string[];
+  password: string
 }
