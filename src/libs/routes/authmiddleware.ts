@@ -28,10 +28,8 @@ export default (module, permissiontype) => (req: IRequest, res: Response, next: 
       } else {
         if (['read', 'write', 'delete'].includes(permissiontype) && decodeUser['role'] == 'head-trainer') {
           req.user = user;
-          console.log("------------", req.user)
           next();
-        }
-        else {
+        } else {
           if (!hasPermissions(module, decodeUser['role'], permissiontype)) {
             next({
               status: 403,
@@ -44,6 +42,7 @@ export default (module, permissiontype) => (req: IRequest, res: Response, next: 
       }
     })
   }
+
   catch (error) {
     next({
 
