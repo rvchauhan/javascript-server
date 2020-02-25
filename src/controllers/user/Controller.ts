@@ -90,24 +90,23 @@ class UserController {
             return next({ error: err, message: err });
         }
     }
-    login = (req: IRequest, res: Response, next: NextFunction) => {
+    login = async (req: IRequest, res: Response, next: NextFunction) => {
         try {
             console.log("::::::::::::INSIDE LOG IN::::::::::::");
             const { email, password } = req.body;
-            this.userRepository.findone(email).then(user => {
-                const match = bcrypt.compare(user.password, password);
-                if (match) {
-                    const token = jwt.sign({ id: user.id, email: user.email, exp: Math.floor(Date.now() / 1000) + 15 * 60 }, config.secretKey)
-                    if (!token) {
-                        console.log("token is not generated")
-                    } else {
-                        return SystemResponse.success(res, token, "token generated")
-                    }
-                    return SystemResponse.success(res, req.user, " Logged in");
+            const user = await this.userRepository.findone(email)
+            const match = await bcrypt.compare(password, user.password);
+            if (match) {
+                const token = await jwt.sign({ id: user.id, email: user.email, exp: Math.floor(Date.now() / 1000) + 15 * 60 }, config.secretKey)
+                if (!token) {
+                    console.log("token is not generated")
                 } else {
-                    console.log("not a User")
+                    return  SystemResponse.success(res, token, "token generated")
                 }
-            })
+                return  SystemResponse.success(res, req.user, " Logged in");
+            } else {
+                console.log("not a User")
+            }
         }
         catch (err) {
             throw err;

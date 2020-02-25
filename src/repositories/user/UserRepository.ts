@@ -20,8 +20,8 @@ class UserRepository extends VersionableRepository<IUserModel, mongoose.Model<IU
   update(id, data) {
     return super.update(id, data);
   };
-  list(skip,limit,sortby) {
-    return super.list(skip,limit,sortby);
+  list(skip, limit, sortby, search) {
+    return super.list(skip, limit, sortby, search);
   };
   delete(id) {
     return super.delete(id);

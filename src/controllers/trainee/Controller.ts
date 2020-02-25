@@ -33,10 +33,19 @@ class TraineeController {
     list = async (req: Request, res: Response, next: NextFunction) => {
         try {
             console.log('-------------INSIDE LIST TRAINEE----------- ');
-            const { skip, limit, sortby } = req.query
+            const { skip, limit, sortby, searchby } = req.query
             const countResult = await this.userRepository.count()
-            const user = await this.userRepository.list(Number(skip), Number(limit), sortby)
-            return SystemResponse.success(res, countResult, user, 'Users List');
+            if (searchby) {
+                const searching = searchby.split(':')
+                const user = await this.userRepository.list(Number(skip), Number(limit), sortby, { name: [searching[0], searching[1]], deletedAt: undefined })
+                user['count'] = countResult;
+                return SystemResponse.success(res, user, 'Users List');
+            }
+            else {
+                const user = await this.userRepository.list(Number(skip), Number(limit), sortby, searchby)
+                user['count'] = countResult;
+                return SystemResponse.success(res, user, 'Users List');
+            }
         }
         catch (err) {
             return next({ error: err, message: err });
@@ -46,7 +55,6 @@ class TraineeController {
         try {
             console.log('------------INSIDE UPDATE TRAINEE-------------');
             const { id, dataToUpdate } = req.body;
-            console.log("??????????", id, dataToUpdate);
             const user = await this.userRepository.update({ _id: id, deletedAt: undefined }, dataToUpdate)
             return SystemResponse.success(res, user, 'Updated user');
         }

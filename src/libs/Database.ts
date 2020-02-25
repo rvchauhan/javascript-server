@@ -11,14 +11,10 @@ class Database {
               console.log("Error in mongoDB connection");
               reject(err);
             }
+
             SeedData()
-              .then(() => {
-                resolve(console.log("DB is connected successfully"));
-              })
-              .catch(() => {
-                console.log("DB is connected successfully");
-                resolve();
-              })
+            resolve(console.log("DB is connected successfully"));
+            resolve();
           })
     });
   };

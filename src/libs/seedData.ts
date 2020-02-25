@@ -4,7 +4,6 @@ import config from '../config/configuration'
 const userRepository = new UserRepository
 export default async () => {
   async function encodedPassword(Password) {
-    console.log("::::::::::", Password)
     return await bcrypt.hash(Password, 10)
   }
   const ecncryptPassword = await encodedPassword(config.Password)

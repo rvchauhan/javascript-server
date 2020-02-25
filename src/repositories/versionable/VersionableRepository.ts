@@ -12,7 +12,7 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
     return this.modelType.countDocuments();
   };
   findOne(id: string): mongoose.Query<D> {
-    return this.modelType.findOne({id:Number}).lean();
+    return this.modelType.findOne({ id: Number }).lean();
   };
   public create(options): Promise<D> {
     const id = VersionableRepository.generateObjectId();
@@ -21,7 +21,7 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
       _id: id,
       originalId: options.id,
       createdBy: options.id
-      
+
     })
   }
   public async update(id, data) {
@@ -33,8 +33,8 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
     })
     return this.modelType.updateOne(id, { updatedBy: id, deletedBy: id, deletedAt: new Date() });
   }
-  public async list(skip,limit,sortBy) {
-    return await this.modelType.find({ deletedAt: undefined }).limit(limit).skip(skip).sort(sortBy)
+  public async list(skip, limit, sortBy, search = { deletedAt: undefined }) {
+    return await this.modelType.find(search).limit(limit).skip(skip).sort(sortBy)
   }
   async delete(id) {
     return await this.modelType.update(id, { deletedAt: new Date() });
