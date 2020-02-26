@@ -139,25 +139,12 @@ traineeRouter.route('/trainee')
   *         403:
   *           description: unauthorised access
   *           schema:
-  *             $ref:'#/definitions/Unauthorized'
-  */
+  *             $ref: '#/definitions/Unauthorized' 
+  *  */
   .get(authmiddleware('getUsers', 'write'), validationHandler(validation.get), TraineeController.list)
     /**
   * @swagger
-  *
-  *definitions:
-  *     Unauthorized:
-  *       type: object
-  *       properties:
-  *         error:
-  *           example: Unauthorized
-  *         message:
-  *           example: Token not found
-  *         status:
-  *           example: 403
-  *         timestamp:
-  *           example: 2019-03-10T19:51:37.066Z
-  *
+  * definitions:
   *     TraineePost:
   *       type: object
   *       properties:
@@ -189,35 +176,35 @@ traineeRouter.route('/trainee')
   *     TraineeResponse:
   *       type: object
   *       properties:
-  *           _id:
-  *             example: 5e4e6e93c095d84d34045a30
-  *           hobbies:
-  *             type: array
-  *             example: ["cicket"]
-  *           name:
-  *             type: string
-  *             example: ravi chauhan
-  *           address:
-  *             type: string
-  *             example: Delhi
-  *           mobile_number:
-  *             type: number
-  *             example: 7017202643
-  *           dob:
-  *             type: Date
-  *             example: 23/03/1998
-  *           email:
-  *             type: string
-  *             example: chauhanravi814@gmail.com
-  *           role:
-  *             type: string
-  *             example: trainee
-  *           originalId:
-  *             example: 5e4e6e93c095d84d34045a30
-  *           createdAt:
-  *             example: 2020-02-20T11:33:39.325Z
-  *           _v:
-  *             example:0
+  *         _id:
+  *           example: 5e4e6e93c095d84d34045a30
+  *         hobbies:
+  *           type: array
+  *           example: ["cicket"]
+  *         name:
+  *           type: string
+  *           example: ravi chauhan
+  *         address:
+  *           type: string
+  *           example: Delhi
+  *         mobile_number:
+  *           type: number
+  *           example: 7017202643
+  *         dob:
+  *           type: Date
+  *           example: 23/03/1998
+  *         email:
+  *           type: string
+  *           example: chauhanravi814@gmail.com
+  *         role:
+  *           type: string
+  *           example: trainee
+  *         originalId:
+  *           example: 5e4e6e93c095d84d34045a30
+  *         createdAt:
+  *           example: 2020-02-20T11:33:39.325Z
+  *         _v:
+  *           example:0
   *
   */
   /**
@@ -254,25 +241,12 @@ traineeRouter.route('/trainee')
   *         403:
   *           description: unauthorised access
   *           schema:
-  *             $ref:'#/definitions/Unauthorized'
+  *             $ref: '#/definitions/Unauthorized'
   */
   .post(authmiddleware('getUsers', 'write'), validationHandler(validation.create), TraineeController.create)
     /**
   * @swagger
-  *
-  *definitions:
-  *     Unauthorized:
-  *       type: object
-  *       properties:
-  *         error:
-  *           example: Unauthorized
-  *         message:
-  *           example: Token not found
-  *         status:
-  *           example: 403
-  *         timestamp:
-  *           example: 2019-03-10T19:51:37.066Z
-  *
+  * definitions:
   *     TraineePut:
   *       type: object
   *       properties: 
@@ -378,19 +352,6 @@ traineeRouter.route('/trainee')
      /**
   * @swagger
   *
-  *definitions:
-  *     Unauthorized:
-  *       type: object
-  *       properties:
-  *         error:
-  *           example: Unauthorized
-  *         message:
-  *           example: Token not found
-  *         status:
-  *           example: 403
-  *         timestamp:
-  *           example: 2019-03-10T19:51:37.066Z
-  * 
   *     TraineeResponse:
   *       type: object
   *       properties:
