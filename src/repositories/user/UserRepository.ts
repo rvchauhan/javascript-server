@@ -7,7 +7,6 @@ class UserRepository extends VersionableRepository<IUserModel, mongoose.Model<IU
   private userModel: mongoose.Model<IUserModel>
   constructor() {
     super(userModel)
-    this.userModel = userModel;
   }
   create(data: Iusercreate) {
     return super.create(data)
@@ -15,11 +14,11 @@ class UserRepository extends VersionableRepository<IUserModel, mongoose.Model<IU
   count() {
     return super.count();
   };
-  findone(data) {
-    return super.findOne(data);
+  async findone(data) {
+    return await super.findOne(data);
   };
   update(id, data) {
-    console.log("_--------",data)
+
     return super.update(id, data);
   };
   list() {

@@ -11,15 +11,15 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
   count(): mongoose.Query<Number> {
     return this.modelType.countDocuments();
   };
-  findOne(id: string): mongoose.Query<D> {
-    return this.modelType.findOne({ originalId: id, deletedAt: undefined }).lean();
+  async findOne(id: string) {
+    return await this.modelType.findOne({ email: id, deletedAt: undefined }).lean();
   };
   public create(options): Promise<D> {
     const id = VersionableRepository.generateObjectId();
     return this.modelType.create({
       _id: id,
-      originalId: options.id,
-      createdBy: options.d,
+      originalId: id,
+      createdBy: options.id,
       ...options
     })
   }
