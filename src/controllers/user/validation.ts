@@ -8,7 +8,10 @@ export default {
       in: ['body'],
       regex: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
       errorMessage: 'email is required'
-    }
+    },
+    password: true,
+    string: true,
+    errorMessage: 'password is required in string'
   },
   create:
   {

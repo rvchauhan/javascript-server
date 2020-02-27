@@ -30,12 +30,8 @@ class UserController {
             }
             const pass = await encodedPassword(password);
             Object.assign(users, { password: pass });
-            this.userRepository.create(users)
-                .then(user => {
-                    return SystemResponse.success(res, user, 'trainee added sucessfully');
-                }).catch(error => {
-                    throw error;
-                });
+            const user = await this.userRepository.create(users)
+            return SystemResponse.success(res, user, 'trainee added sucessfully');
         } catch (err) {
             return next({ error: err, message: err });
         }
@@ -85,7 +81,7 @@ class UserController {
             return next({ error: err, message: err });
         }
     }
-    
+
     login = async (req: IRequest, res: Response, next: NextFunction) => {
         try {
             console.log("::::::::::::INSIDE LOG IN::::::::::::");
