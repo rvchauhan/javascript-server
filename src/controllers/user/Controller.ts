@@ -19,16 +19,18 @@ class UserController {
         UserController.instance = new UserController();
         return UserController.instance;
     }
+    
+    encodedPassword(password:string):string {
+        return  bcrypt.hash(password, 10)
+    }
 
     create = async (req: Request, res: Response, next: NextFunction) => {
         try {
             console.log('-----------------CREATE TRAINEE USER----------------:');
             const users: Iusercreate = req.body;
             const password = users.password;
-            async function encodedPassword(password) {
-                return await bcrypt.hash(password, 10)
-            }
-            const pass = await encodedPassword(password);
+          
+            const pass = await this.encodedPassword(password);
             Object.assign(users, { password: pass });
             const user = await this.userRepository.create(users)
             return SystemResponse.success(res, user, 'trainee added sucessfully');

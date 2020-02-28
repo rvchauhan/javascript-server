@@ -1,13 +1,11 @@
 import UserRepository from '../repositories/user/UserRepository'
 import * as bcrypt from 'bcrypt'
+import UserController from '../controllers/user/Controller'
 import config from '../config/configuration'
 const userRepository = new UserRepository
 export default async () => {
-  async function encodedPassword(Password) {
-    console.log("::::::::::", Password)
-    return await bcrypt.hash(Password, 10)
-  }
-  const ecncryptPassword = await encodedPassword(config.Password)
+
+  const ecncryptPassword: string = await UserController.encodedPassword(config.Password)
   const user = {
     "name": 'trainee',
     "address": 'Noida',
