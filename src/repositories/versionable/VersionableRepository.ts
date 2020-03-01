@@ -11,33 +11,31 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
   count(): mongoose.Query<Number> {
     return this.modelType.countDocuments();
   };
-  findOne(id: string): mongoose.Query<D> {
-    return this.modelType.findOne({ originalId: id, deletedAt: undefined }).lean();
+  async findOne(id: string) {
+    return await this.modelType.findOne({ _id: id, deletedAt: undefined }).lean();
   };
-  public create(options): Promise<D> {
-    const id = VersionableRepository.generateObjectId();
-    return this.modelType.create({
+  public async create(options): Promise<D> {
+    const id = await VersionableRepository.generateObjectId();
+    return await this.modelType.create({
       _id: id,
-      originalId: options.id,
-      createdBy: options.d,
+      originalId: id,
+      createdBy: options.id,
       ...options
     })
   }
   public async update(id, data) {
     let record = await this.findOne(id);
-    this.delete(id);
-    this.create({
+    await this.delete(id);
+    await this.create({
       ...record,
       ...data,
       updatedAt: new Date()
     })
-    return this.modelType.updateOne(id, { updatedBy: id, deletedBy: id, deletedAt: new Date() });
   }
   public list() {
     return this.modelType.find({ deletedAt: undefined })
   }
   async delete(id) {
-    return await this.modelType.update(id, { deletedAt: new Date() });
+    return await this.modelType.update({ originalId: id }, { deletedAt: new Date() });
   }
-
 }

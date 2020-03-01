@@ -12,4 +12,3 @@ traineeRouter.route('/trainee')
 traineeRouter.delete('/trainee/:id', authmiddleware('getUsers', 'write'),validationHandler(validation.delete), TraineeController.delete);
 
 export default traineeRouter;
-

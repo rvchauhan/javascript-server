@@ -1,4 +1,18 @@
 export default {
+  login:
+  {
+    email:
+    {
+      required: true,
+      string: true,
+      in: ['body'],
+      regex: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+      errorMessage: 'email is required'
+    },
+    password: true,
+    string: true,
+    errorMessage: 'password is required in string'
+  },
   create:
   {
     name: {
@@ -32,19 +46,13 @@ export default {
       in: ['body'],
       errorMessage: 'DOB is required',
     },
-    email: {
-      required: true,
-      string: true,
-      in: ['body'],
-      errorMessage: 'email is required',
-    },
     hobbies: {
       required: true,
       array: 'string',
       in: ['body'],
       errorMessage: 'hobby is required',
 
-    }
+    },
   },
   delete:
   {
@@ -89,7 +97,7 @@ export default {
       isObject: true,
       custom: (dataToUpdate: any) => {
         console.log(dataToUpdate);
-      },
-    }
+      }
+    },
   }
 };
