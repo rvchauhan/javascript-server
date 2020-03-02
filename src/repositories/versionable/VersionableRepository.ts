@@ -20,8 +20,8 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
     return await this.modelType.create({
       _id: id,
       originalId: options.id,
-      createdBy: options.id
-      
+      createdBy: options.id,
+      ...options
     })
   }
   public async update(id, data) {
