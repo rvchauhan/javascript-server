@@ -18,14 +18,6 @@ export default (module, permissiontype) => async (req: IRequest, res: Response, 
         message: "Unauthorized "
       });
     }
-<<<<<<< HEAD
-    UserRepository.findone({ 'email': decodeUser['email'], '_id': decodeUser['id'],deletedAt: undefined  }).then(user => {
-      if (user == null) {
-        next({
-          error: "Unauthorized Access",
-          message: "User doesn't exist"
-        })
-=======
     const user = await UserRepository.findone({ 'email': decodeUser['email'], '_id': decodeUser['id'] })
     if (user == null) {
       next({
@@ -36,7 +28,6 @@ export default (module, permissiontype) => async (req: IRequest, res: Response, 
       if (['read', 'write', 'delete'].includes(permissiontype) && decodeUser['role'] == 'head-trainer') {
         req.user = user;
         next();
->>>>>>> 5c3c3c93bac60a71fd9f0f7234a2ec7cfb059572
       } else {
         if (!hasPermissions(module, decodeUser['role'], permissiontype)) {
           next({
