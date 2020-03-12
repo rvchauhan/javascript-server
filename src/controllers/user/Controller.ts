@@ -19,67 +19,7 @@ class UserController {
         UserController.instance = new UserController();
         return UserController.instance;
     }
-    // //     create = async (req: Request, res: Response, next: NextFunction) => {
-    // //         try {
-    // //             console.log('-----------------CREATE TRAINEE USER----------------:');
-    // //             const users : Iusercreate = req.body;
-    // //             const password = users.password;
-    // //             async function encodedPassword(password) {
-    // //                return await bcrypt.hash(password, 10)
-    // //               }
-    // //              const pass= await encodedPassword(password);
-    // //               Object.assign(users,{password: pass});
-    // //             this.userRepository.create(users)
-    // //                 .then(user => {
-    // //                     return SystemResponse.success(res, user, 'trainee added sucessfully');
-    // //                 }).catch(error => {
-    // //                     throw error;
-    // //                 });
-    // //         } catch (err) {
-    // //             return next({ error: err, message: err });
-    // //         }
-    // //     };
-    // //     list = async(req: Request, res: Response, next: NextFunction) => {
-    // //         try {
-    // //             console.log('-------------INSIDE LIST TRAINEE----------- ');
-    // //             const {skip,limit,sortby}=req.query
-    // //             const countResult=await this.userRepository.count()
-    // //             this.userRepository.list(Number(skip),Number(limit),sortby)
-    // //             .then(user => {
-    // //                 return SystemResponse.success(res,countResult,user, 'Users List');
-    // //             }).catch(error => {
-    // //                 throw error;
-    // //             });
-    // //         }
-    // //         catch (err) {
-    // //             return next({ error: err, message: err });
-    // //         }
-    // //     };
-    // //     update = (req: Request, res: Response, next: NextFunction) => {
-    // //         try {
-    // //             console.log('------------INSIDE UPDATE TRAINEE-------------');
-    // //             const { id, dataToUpdate } = req.body;
-    // //             this.userRepository.update({ _id: id }, dataToUpdate).then(user => {
-    // //                 return SystemResponse.success(res, user, 'Updated user');
-    // //             }).catch(error => {
-    // //                 throw error;
-    // //             });
-    // //         }
-    // //         catch (err) {
-    // //             return next({ error: err, message: err });
-    // //         }
-    // //     };
-    // //     delete = (req: Request, res: Response, next: NextFunction) => {
-    // //         try {
-    // //             console.log(' :::::::::: Inside Delete Trainee :::::::: ');
-    // //             const { id } = req.params;
-    // //             this.userRepository.delete({ _id: id }).then(user => {
-    // //                 return SystemResponse.success(res, user, 'User Deleted Successfully')
-    // //             });
-    // //         } catch (err) {
-    // //             throw err;
-    // //         }
-    // //     };
+
     me = async (req: IRequest, res: Response, next: NextFunction) => {
         try {
             console.log(":::::::::::::::INSIDE ME::::::::::::::");
@@ -90,6 +30,10 @@ class UserController {
             return next({ error: err, message: err });
         }
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 86fa1069470d148aa714e1a224d875f69aa87abb
     login = async (req: IRequest, res: Response, next: NextFunction) => {
         try {
             console.log("::::::::::::INSIDE LOG IN::::::::::::");
@@ -101,9 +45,15 @@ class UserController {
                 if (!token) {
                     console.log("token is not generated")
                 } else {
+<<<<<<< HEAD
                     return  SystemResponse.success(res, token, "token generated")
                 }
                 return  SystemResponse.success(res, req.user, " Logged in");
+=======
+                    return SystemResponse.success(res, token, "token generated")
+                }
+                return SystemResponse.success(res, req.user, " Logged in");
+>>>>>>> 86fa1069470d148aa714e1a224d875f69aa87abb
             } else {
                 console.log("not a User")
             }

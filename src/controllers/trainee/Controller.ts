@@ -15,6 +15,12 @@ class TraineeController {
     return TraineeController.instance;
   }
 
+  async encodedPassword(password:string) {
+    const pass= await bcrypt.hash(password, 10);
+    console.log("pass",pass)
+    return pass;
+}
+
   create = async (req: Request, res: Response, next: NextFunction) => {
     try {
       console.log('-----------------CREATE TRAINEE USER----------------:');
