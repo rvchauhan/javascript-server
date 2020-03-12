@@ -19,10 +19,6 @@ class UserController {
         UserController.instance = new UserController();
         return UserController.instance;
     }
-    
-    encodedPassword(password:string):string {
-        return  bcrypt.hash(password, 10)
-    }
 
     me = async (req: IRequest, res: Response, next: NextFunction) => {
         try {
