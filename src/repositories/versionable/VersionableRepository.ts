@@ -33,8 +33,9 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
     })
     return this.modelType.updateOne(id, { updatedBy: id, deletedBy: id, deletedAt: new Date() });
   }
-  public async list(skip, limit, sortBy, search = { deletedAt: undefined }) {
-    return await this.modelType.find(search).limit(limit).skip(skip).sort(sortBy)
+  public async list(skip, limit, sortBy, search ) {
+    console.log(search)
+    return await this.modelType.find({deletedAt: undefined,...search } ).limit(limit).skip(skip).sort(sortBy)
   }
   async delete(id) {
     return await this.modelType.update(id, { deletedAt: new Date() });

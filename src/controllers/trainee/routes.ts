@@ -114,7 +114,7 @@ traineeRouter.route('/trainee')
   *           in: query
   *           required: false
   *           type: string
-  *         - name: search
+  *         - name: searchby
   *           description: data to be search by
   *           in: query
   *           required: false
@@ -139,7 +139,7 @@ traineeRouter.route('/trainee')
   *         403:
   *           description: unauthorised access
   *           schema:
-  *             $ref: '#/definitions/Unauthorized' 
+  *             $ref: '#/definitions/Unauthorized'
   *  */
   .get(authmiddleware('getUsers', 'write'), validationHandler(validation.get), TraineeController.list)
     /**
@@ -249,34 +249,19 @@ traineeRouter.route('/trainee')
   * definitions:
   *     TraineePut:
   *       type: object
-  *       properties: 
+  *       properties:
   *         id:
   *           example: 5e4e6e93c095d84d34045a30
-  *         name:
-  *           type: string
-  *           example: Ravi
-  *         address:
-  *           type: string
-  *           example: Noida
-  *         mobile_number:
-  *           type: number
-  *           example: 9717043261
-  *         role:
-  *           type: string
-  *           example: trainee
-  *         dob:
-  *           type: Date
-  *           example: 12/04/1998
-  *         hobbies:
-  *           type: array
-  *           example: ["cricket"]
-  *         email:
-  *           type: string
-  *           example: chauhanravi814@gmail.com
-  *         password:
-  *           type: string
-  *           example: Trainer@123
-  * 
+  *         dataToUpdate:
+  *           type: object
+  *           example:
+  *             name:: string
+  *             address: string
+  *             mobile_number: number
+  *             dob: date
+  *             email: string
+  *             role: string
+  *
   *     TraineeResponse:
   *       type: object
   *       properties:
@@ -415,7 +400,7 @@ traineeRouter.route('/trainee')
 *               data:
 *                 type: object
 *                 allOf:
-*                   - $ref: '#/definitions/TraineeResponse'  
+*                   - $ref: '#/definitions/TraineeResponse'
 *         403:
 *           description: unauthorised access
 *           schema:

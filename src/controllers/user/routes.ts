@@ -72,17 +72,17 @@ UserRouter.route('/me')
 *           description: login
 *           schema:
 *             $ref: '#/definitions/Token'
-*         422:  
+*         422:
 *           description: invalid email or password
 *           schema:
 *             oneOf:
-*               properties:
+*             properties:
 *               status:
-*                 example: "Bad Request"
+*                   example: "Bad Request"
 *               message:
-*                 example: Password does not match
+*                   example: Password does not match
 *               err:
-*                 example: Password is incorrect
+*                   example: Password is incorrect
 */
 UserRouter.route('/login')
   .post(validationHandler(validation.login), UserController.login);
