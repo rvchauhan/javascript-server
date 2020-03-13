@@ -17,12 +17,12 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
   };
   public async create(options): Promise<D> {
     const id = await VersionableRepository.generateObjectId();
+    delete options._id;
     return await this.modelType.create({
-      ...options,
       _id: id,
-      originalId: options.originalId,
+      originalId: id,
       createdBy: options.id,
-
+      ...options,
     })
   }
   public async update(id, data) {
@@ -31,7 +31,8 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
     await this.create({
       ...record,
       ...data,
-      updatedAt: new Date()
+      updatedAt: new Date(),
+      deletedAt:undefined
     })
   }
   public async list(skip,limit,sortBy) {
