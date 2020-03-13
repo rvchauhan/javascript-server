@@ -41,19 +41,17 @@ class TraineeController {
   list = async (req: Request, res: Response, next: NextFunction) => {
     try {
       console.log('-------------INSIDE LIST TRAINEE----------- ');
-      const { skip, limit, sortby, searchby } = req.query
+      const { skip, limit, sortBy, searchBy } = req.query
       const countResult = await this.userRepository.count()
-      if (searchby) {
-        const searching = searchby.split(':')
-
-        let user = await this.userRepository.list(skip, limit, sortby, { name: { $regex: searchby.toLowerCase() } });
-        const List = await this.userRepository.list(skip, limit, sortby, { email: { $regex: searchby.toLowerCase() } });
+      if (searchBy) {
+        let user = await this.userRepository.list(skip, limit, sortBy, { name: { $regex: searchBy.toLowerCase() } });
+        const List = await this.userRepository.list(skip, limit, sortBy, { email: { $regex: searchBy.toLowerCase() } });
         user = { ...user, ...List };
         user['count'] = countResult;
         return SystemResponse.success(res, user, 'Users List');
       }
       else {
-        const user = await this.userRepository.list(Number(skip), Number(limit), sortby, searchby)
+        const user = await this.userRepository.list(Number(skip), Number(limit), sortBy, searchBy)
         user['count'] = countResult;
         return SystemResponse.success(res, user, 'Users List');
       }

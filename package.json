@@ -22,11 +22,7 @@
   "author": "Ravi",
   "license": "ISC",
   "dependencies": {
-<<<<<<< HEAD
     "bcrypt": "^4.0.0",
-=======
-    "bcrypt": "^4.0.1",
->>>>>>> 86fa1069470d148aa714e1a224d875f69aa87abb
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",

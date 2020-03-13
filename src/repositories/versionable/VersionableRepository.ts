@@ -1,5 +1,6 @@
 import * as mongoose from 'mongoose'
 import { idText } from 'typescript';
+
 export default class VersionableRepository<D extends mongoose.Document, M extends mongoose.Model<D>> {
   static generateObjectId() {
     return String(mongoose.Types.ObjectId());
@@ -8,51 +9,44 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
   constructor(modelType) {
     this.modelType = modelType;
   }
+
   count(): mongoose.Query<Number> {
     return this.modelType.countDocuments();
   };
-<<<<<<< HEAD
-  findOne(id: string): mongoose.Query<D> {
-    return this.modelType.findOne({ id: Number }).lean();
-=======
 
   async findOne(id: string) {
-    return await this.modelType.findOne({ _id: id, deletedAt: undefined }).lean();
->>>>>>> 86fa1069470d148aa714e1a224d875f69aa87abb
+    return await this.modelType.findOne().lean();
   };
+
   public async create(options): Promise<D> {
     const id = await VersionableRepository.generateObjectId();
+    delete options._id;
     return await this.modelType.create({
-      ...options,
       _id: id,
-<<<<<<< HEAD
-      originalId: options.id,
-      createdBy: options.id
-=======
-      originalId: options.originalId,
-      createdBy: options.id,
->>>>>>> 86fa1069470d148aa714e1a224d875f69aa87abb
+      originalId: id,
+      createdBy: id,
+      ...options,
 
     })
   }
+
   public async update(id, data) {
     let record = await this.findOne(id);
     await this.delete(id);
     await this.create({
       ...record,
       ...data,
-      updatedAt: new Date()
+      updatedAt: new Date(),
+      deletedAt:undefined
     })
   }
-  public async list(skip, limit, sortBy, search ) {
+
+  public async list(skip, limit, sortBy, search) {
     console.log(search)
-    return await this.modelType.find({deletedAt: undefined,...search } ).limit(limit).skip(skip).sort(sortBy)
+    return await this.modelType.find({ deletedAt: undefined, ...search }).limit(limit).skip(skip).sort(sortBy)
   }
+
   async delete(id) {
     return await this.modelType.update({ originalId: id }, { deletedAt: new Date() });
   }
-<<<<<<< HEAD
-
-=======
->>>>>>> 86fa1069470d148aa714e1a224d875f69aa87abb
 }

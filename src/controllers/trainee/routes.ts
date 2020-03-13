@@ -167,7 +167,7 @@ traineeRouter.route('/trainee')
   *           example: ["cricket"]
   *         email:
   *           type: string
-  *           example: chauhanravi814@gmail.com
+  *           example: chauhanravi814@successive.tech
   *         password:
   *           type: string
   *           example: Trainer@123

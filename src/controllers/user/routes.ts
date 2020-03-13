@@ -19,7 +19,7 @@ const UserRouter = Router();
 *            example: chauhanravi814@gmail.com
 *          password:
 *            type: string
-*            example: ravi@1998
+*            example: trainee@123
 *     Token:
 *        type: object
 *        properties:
