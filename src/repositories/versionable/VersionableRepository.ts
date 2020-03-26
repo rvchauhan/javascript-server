@@ -12,7 +12,7 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
     return this.modelType.countDocuments();
   };
 
-  async findOne(id: string) {
+  async findOne(id) {
     return await this.modelType.findOne({ _id: id, deletedAt: undefined }).lean();
   };
   public async create(options): Promise<D> {

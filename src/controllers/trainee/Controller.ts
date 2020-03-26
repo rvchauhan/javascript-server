@@ -51,7 +51,7 @@ class TraineeController {
     try {
       console.log('------------INSIDE UPDATE TRAINEE-------------');
       const { id, dataToUpdate } = req.body;
-      const user = await this.userRepository.update({ id: id }, dataToUpdate)
+      const user = await this.userRepository.update(id, dataToUpdate)
       return SystemResponse.success(res, user, 'Updated user');
     }
     catch (err) {
