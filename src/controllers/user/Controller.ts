@@ -19,59 +19,6 @@ class UserController {
         UserController.instance = new UserController();
         return UserController.instance;
     }
-    
-    encodedPassword(password:string):string {
-        return  bcrypt.hash(password, 10)
-    }
-
-    create = async (req: Request, res: Response, next: NextFunction) => {
-        try {
-            console.log('-----------------CREATE TRAINEE USER----------------:');
-            const users: Iusercreate = req.body;
-            const password = users.password;
-          
-            const pass = await this.encodedPassword(password);
-            Object.assign(users, { password: pass });
-            const user = await this.userRepository.create(users)
-            return SystemResponse.success(res, user, 'trainee added sucessfully');
-        } catch (err) {
-            return next({ error: err, message: err });
-        }
-    };
-
-    list = async (req: Request, res: Response, next: NextFunction) => {
-        try {
-            console.log('-------------INSIDE LIST TRAINEE----------- ');
-            const user = await this.userRepository.list()
-            return SystemResponse.success(res, user, 'Users List');
-        }
-        catch (err) {
-            return next({ error: err, message: err });
-        }
-    };
-
-    update = async (req: Request, res: Response, next: NextFunction) => {
-        try {
-            console.log('------------INSIDE UPDATE TRAINEE-------------');
-            const { id, dataToUpdate } = req.body;
-            const user = await this.userRepository.update({ _id: id }, dataToUpdate)
-            return SystemResponse.success(res, user, 'Updated user');
-        }
-        catch (err) {
-            return next({ error: err, message: err });
-        }
-    };
-
-    delete = async (req: Request, res: Response, next: NextFunction) => {
-        try {
-            console.log(' :::::::::: Inside Delete Trainee :::::::: ');
-            const { id } = req.params;
-            const user = await this.userRepository.delete({ _id: id })
-            return SystemResponse.success(res, user, 'User Deleted Successfully')
-        } catch (err) {
-            throw err;
-        }
-    };
 
     me = async (req: IRequest, res: Response, next: NextFunction) => {
         try {

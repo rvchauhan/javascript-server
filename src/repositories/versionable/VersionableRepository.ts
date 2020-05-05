@@ -11,16 +11,18 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
   count(): mongoose.Query<Number> {
     return this.modelType.countDocuments();
   };
-  async findOne(id: string) {
+
+  async findOne(id) {
     return await this.modelType.findOne({ _id: id, deletedAt: undefined }).lean();
   };
   public async create(options): Promise<D> {
     const id = await VersionableRepository.generateObjectId();
+    delete options._id;
     return await this.modelType.create({
       _id: id,
       originalId: id,
       createdBy: options.id,
-      ...options
+      ...options,
     })
   }
   public async update(id, data) {
@@ -29,11 +31,12 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
     await this.create({
       ...record,
       ...data,
-      updatedAt: new Date()
+      updatedAt: new Date(),
+      deletedAt:undefined
     })
   }
-  public list() {
-    return this.modelType.find({ deletedAt: undefined })
+  public async list(skip,limit,sortBy) {
+    return await this.modelType.find({ deletedAt: undefined }).limit(limit).skip(skip).sort(sortBy)
   }
   async delete(id) {
     return await this.modelType.update({ originalId: id }, { deletedAt: new Date() });

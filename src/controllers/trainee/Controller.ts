@@ -1,81 +1,73 @@
-import { Request, Response } from 'express'
-import { Resolver } from 'dns';
+import { Request, Response, NextFunction } from 'express';
+import UserRepository from '../../repositories/user/UserRepository';
+import SystemResponse from '../../libs/SystemResponse'
+import * as bcrypt from 'bcrypt'
+import Iusercreate from './../../repositories/entities/Iusercreate'
 class TraineeController {
-    static instance: TraineeController;
-    static getinstance = () => {
-        if (TraineeController.instance) {
-            return TraineeController.instance;
-        }
-        TraineeController.instance = new TraineeController();
-        return new TraineeController;
+  static instance: TraineeController;
+  static userRepository: UserRepository;
+  userRepository = new UserRepository();
+  static getInstance = () => {
+    if (TraineeController.instance) {
+      return TraineeController.instance;
     }
-    create = (req: Request, res: Response) => {
-        console.log("----------CREATE-TRAINEE---------------");
-        res.send({
-            status: 'OK',
-            message: 'Trainee Added Successfully',
-            data: {
-                id: 1,
-                name: ' Ravi Chauhan ',
-                position: ' Trainee Developer ',
-                City: 'Noida'
-            }
-        })
-    }
-
-    list = (req: Request, res: Response) => {
-        console.log("----------TRAINEE-LIST-----------------");
-        res.send({
-            status: 'OK',
-            message: 'Trainee Listed Successfully',
-            data: [{
-                id: 1,
-                name: ' Ravi Chauhan ',
-                position: ' Trainee Developer ',
-                City: 'Noida'
-            },
-            {
-                id: 2,
-                name: ' Vibhor Garg ',
-                position: ' Trainee Developer ',
-                City: 'Noida'
-            },
-            {
-                id: 3,
-                name: ' Shiva ',
-                position: ' Trainee Developer ',
-                City: 'Delhi'
-            }]
-        })
-    }
-    put = (req: Request, res: Response) => {
-        console.log("----------UPDATE-TRAINEE---------------");
-        res.send({
-            status: 'OK',
-            message: 'Trainee Update Successfully',
-            data: {
-                id: 3,
-                name: ' Ravi Chauhan ',
-                position: ' Trainee Developer ',
-                City: 'Noida'
-            }
-        })
-
-    }
-    delete = (req: Request, res: Response) => {
-        console.log("----------DELETE-TRAINEE---------------");
-        res.send({
-            status: 'OK',
-            message: 'Trainee Delete Successfully',
-            data: {
-                id: 3,
-                name: ' Ravi Chauhan ',
-                position: ' Trainee Developer ',
-                City: 'Noida'
-            }
-        })
-
-    }
+    TraineeController.instance = new TraineeController();
+    return TraineeController.instance;
+  }
+   async encodedPassword(password:string) {
+    const pass= await bcrypt.hash(password, 10);
+    console.log("pass",pass)
+    return pass;
 }
 
-export default TraineeController.getinstance();
+  create = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      console.log('-----------------CREATE TRAINEE USER----------------:');
+      const users: Iusercreate = req.body;
+      const password = users.password;
+      const pass = await this.encodedPassword(password);
+      await Object.assign(users, { password: pass });
+      const user = await this.userRepository.create(users)
+      return SystemResponse.success(res, user, 'trainee added sucessfully');
+    } catch (err) {
+      return next({ error: err, message: err });
+    }
+  };
+
+  list = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      console.log('-------------INSIDE LIST TRAINEE----------- ');
+      const { skip, limit, sortby } = req.query
+      const countResult = await this.userRepository.count()
+      const user = await this.userRepository.list(Number(skip), Number(limit), sortby)
+      return SystemResponse.success(res, countResult, user, 'Users List');
+    }
+    catch (err) {
+      return next({ error: err, message: err });
+    }
+  };
+
+  update = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      console.log('------------INSIDE UPDATE TRAINEE-------------');
+      const { id, dataToUpdate } = req.body;
+      const user = await this.userRepository.update(id, dataToUpdate)
+      return SystemResponse.success(res, user, 'Updated user');
+    }
+    catch (err) {
+      return next({ error: err, message: err });
+    }
+  };
+
+  delete = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      console.log(' :::::::::: Inside Delete Trainee :::::::: ');
+      const { id } = req.params;
+      const user = await this.userRepository.delete({ id: id })
+      return SystemResponse.success(res, user, 'User Deleted Successfully')
+    } catch (err) {
+      throw err;
+    }
+  };
+}
+export default TraineeController.getInstance();
