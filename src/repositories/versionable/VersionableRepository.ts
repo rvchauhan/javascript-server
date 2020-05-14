@@ -14,8 +14,8 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
     return this.modelType.countDocuments();
   };
 
-  async findOne(id: string) {
-    return await this.modelType.findOne().lean();
+  async findOne(id) {
+    return await this.modelType.findOne({ _id: id, deletedAt: undefined }).lean();
   };
 
   public async create(options): Promise<D> {
@@ -24,9 +24,8 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
     return await this.modelType.create({
       _id: id,
       originalId: id,
-      createdBy: id,
+      createdBy: options.id,
       ...options,
-
     })
   }
 

@@ -65,7 +65,7 @@ class TraineeController {
     try {
       console.log('------------INSIDE UPDATE TRAINEE-------------');
       const { id, dataToUpdate } = req.body;
-      const user = await this.userRepository.update({ _id: id, deletedAt: undefined }, dataToUpdate)
+      const user = await this.userRepository.update(id, dataToUpdate)
       return SystemResponse.success(res, user, 'Updated user');
     }
     catch (err) {
@@ -77,7 +77,7 @@ class TraineeController {
     try {
       console.log(' :::::::::: Inside Delete Trainee :::::::: ');
       const { id } = req.params;
-      const user = await this.userRepository.delete({ _id: id })
+      const user = await this.userRepository.delete({ id: id })
       return SystemResponse.success(res, user, 'User Deleted Successfully')
     } catch (err) {
       throw err;
