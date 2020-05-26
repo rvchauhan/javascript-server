@@ -15,11 +15,11 @@ class TraineeController {
     return TraineeController.instance;
   }
 
-  async encodedPassword(password:string) {
-    const pass= await bcrypt.hash(password, 10);
-    console.log("pass",pass)
+  async encodedPassword(password: string) {
+    const pass = await bcrypt.hash(password, 10);
+    console.log("pass", pass)
     return pass;
-}
+  }
 
   create = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -41,12 +41,11 @@ class TraineeController {
   list = async (req: Request, res: Response, next: NextFunction) => {
     try {
       console.log('-------------INSIDE LIST TRAINEE----------- ');
-      const { skip, limit, sortBy, searchBy } = req.query
-      const countResult = await this.userRepository.count()
-      if (searchBy) {
-        let user = await this.userRepository.list(skip, limit, sortBy, { name: { $regex: searchBy.toLowerCase() } });
-        const List = await this.userRepository.list(skip, limit, sortBy, { email: { $regex: searchBy.toLowerCase() } });
-        user = { ...user, ...List };
+      const { skip, limit, sortBy, searchBy } = req.query;
+      const countResult = await this.userRepository.count();
+      const search = await searchBy ? searchBy.toLowerCase() : "";
+      if (search) {
+        let user = await this.userRepository.list(skip, limit, sortBy, { $or: [{ name: { $regex: search } }, { email: { $regex: search } } ]});
         user['count'] = countResult;
         return SystemResponse.success(res, user, 'Users List');
       }
