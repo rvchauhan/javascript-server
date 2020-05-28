@@ -1,15 +1,4 @@
 export default {
-  login:
-  {
-    email:
-    {
-      required: true,
-      string: true,
-      in: ['body'],
-      regex: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-      errorMessage: 'email is required'
-    }
-  },
   create:
   {
     name: {
@@ -48,8 +37,19 @@ export default {
       array: 'string',
       in: ['body'],
       errorMessage: 'hobby is required',
-
     },
+    email: {
+      required: true,
+      regex: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((successive.tech))$/,
+      string: true,
+      in: ["body"],
+      errorMessage: "Email is required",
+    },
+    password: {
+      required: true,
+      in: ["body"],
+      errorMessage: "password is required"
+    }
   },
   delete:
   {

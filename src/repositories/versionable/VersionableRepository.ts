@@ -1,5 +1,6 @@
 import * as mongoose from 'mongoose'
 import { idText } from 'typescript';
+
 export default class VersionableRepository<D extends mongoose.Document, M extends mongoose.Model<D>> {
   static generateObjectId() {
     return String(mongoose.Types.ObjectId());
@@ -8,6 +9,7 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
   constructor(modelType) {
     this.modelType = modelType;
   }
+
   count(): mongoose.Query<Number> {
     return this.modelType.countDocuments();
   };
@@ -15,6 +17,7 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
   async findOne(id) {
     return await this.modelType.findOne({ _id: id, deletedAt: undefined }).lean();
   };
+
   public async create(options): Promise<D> {
     const id = await VersionableRepository.generateObjectId();
     delete options._id;
@@ -25,6 +28,7 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
       ...options,
     })
   }
+
   public async update(id, data) {
     let record = await this.findOne(id);
     await this.delete(id);
@@ -35,9 +39,12 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
       deletedAt:undefined
     })
   }
-  public async list(skip,limit,sortBy) {
-    return await this.modelType.find({ deletedAt: undefined }).limit(limit).skip(skip).sort(sortBy)
+
+  public async list(skip, limit, sortBy, search) {
+    console.log(search)
+    return await this.modelType.find({ deletedAt: undefined, ...search }).limit(limit).skip(skip).sort(sortBy)
   }
+
   async delete(id) {
     return await this.modelType.update({ originalId: id }, { deletedAt: new Date() });
   }

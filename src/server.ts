@@ -6,6 +6,9 @@ import notFoundRoutes from './libs/routes/notFoundRoute';
 import errorHandler from './libs/routes/errorHandler';
 import mainRouter from './router';
 import { config } from 'dotenv';
+import * as swaggerUI from 'swagger-ui-express';
+import * as swaggerJsDoc from 'swagger-jsdoc';
+
 import Database from '../src/libs/Database'
 class Server {
   private app: express.Application;
@@ -16,6 +19,28 @@ class Server {
     this.initBodyParser();
     this.setupRoutes();
     return this;
+  }
+  public initSwagger = () => {
+    const options = {
+      definition: {
+        info: {
+          title: 'Javascript-Server API',
+          version: '1.0.0',
+        },
+        securityDefinitions: {
+          Bearer: {
+            type: 'apiKey',
+            name: 'Authorization',
+            in: 'headers'
+          }
+        }
+      },
+      basePath: '/api',
+      swagger: '2.0',
+      apis: ['./dist/src/controllers/**/routes.js'],
+    };
+    const swaggerSpec = swaggerJsDoc(options);
+    return swaggerSpec;
   }
   run = (): void => {
     const { app, config: { port, mongoDBUri } } = this;
@@ -41,6 +66,7 @@ class Server {
   }
   setupRoutes = () => {
     const { app } = this;
+    this.app.use('/swagger', swaggerUI.serve, swaggerUI.setup(this.initSwagger()))
     app.use('/health-check', (req, res) => {
       console.log(' Inside health check ');
       res.send(' I am OK ');

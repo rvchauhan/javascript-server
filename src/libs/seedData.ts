@@ -1,7 +1,8 @@
-import UserRepository from '../repositories/user/UserRepository'
-import * as bcrypt from 'bcrypt'
+import UserRepository from '../repositories/user/UserRepository';
+import * as bcrypt from 'bcrypt';
 import traineeController from '../controllers/trainee/Controller';
-import config from '../config/configuration'
+import config from '../config/configuration';
+
 const userRepository = new UserRepository
 export default async () => {
   const ecncryptPassword= await traineeController.encodedPassword(config.Password);
@@ -12,6 +13,7 @@ export default async () => {
     "mobile_number": 9717043261,
     "email": 'chauhanravi814@gmail.com',
     "hobbies": ["motovlogging"],
+    "role": "head-trainer",
     "password": ecncryptPassword
   };
   console.log(user);
